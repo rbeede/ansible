@@ -6,7 +6,7 @@ First version is single playbook. Future work will break out into multiple roles
 
 `sudo apt-get install --assume-yes ansible git`
 
-`ansible-pull --url https://github.com/rbeede/ansible.git --inventory localhost, pentest-machine-playbook.yaml`
+`ansible-pull --verbose --url https://github.com/rbeede/ansible.git --inventory localhost, pentest-machine-playbook.yaml`
 
 ### Alternative
 
