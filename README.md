@@ -10,4 +10,4 @@ First version is single playbook. Future work will break out into multiple roles
 
 ### Alternative
 
-`ansible-pull --url https://github.com/rbeede/ansible/ --inventory localhost, pentest-machine-playbook.yaml`
+`ansible-pull --url https://github.com/rbeede/ansible.git --inventory localhost, pentest-machine-playbook.yaml`
