@@ -10,9 +10,7 @@ export HTTPS_PROXY=http://127.0.0.1:8080
 export HTTP_PROXY=$HTTPS_PROXY
 
 
-openssl x509 -inform der -in ~/Documents/burp-ca.crt -out ~/Documents/burp.pem
-
-export AWS_CA_BUNDLE=~/Documents/burp.pem
+export AWS_CA_BUNDLE=~/Documents/burp-ca.pem
 
 export NO_PROXY=169.254.169.254
 
