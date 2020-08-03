@@ -71,7 +71,7 @@
                 "interval":30,
                 "show_progress":false
             },
-            "enable_proxy_interception_at_startup":"always",
+            "enable_proxy_interception_at_startup":"never",
             "exceptions_log_directory":"",
             "hotkeys":[
                 {
