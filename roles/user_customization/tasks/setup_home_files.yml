@@ -1,0 +1,7 @@
+- name: Copy any useful files to home directory
+  copy:
+    src: homedir/  # from role's files/ directory
+    dest: /home/rbeede/
+    owner: rbeede
+    group: rbeede
+    mode: 0400

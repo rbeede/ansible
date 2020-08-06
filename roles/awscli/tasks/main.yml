@@ -1,0 +1,24 @@
+- name: AWS CLI (OS bundled) removed
+  package:
+    name: aws-cli
+    state: absent
+
+- name: AWS CLI - Download and Extract latest
+  unarchive:
+    src: https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip
+    dest: /tmp/
+    remote_src: yes
+    # Do not set mode as we need to preserve the permissions inside the zip
+
+- name: AWS CLI - Install system wide
+  # Must use shell task to get correct umask
+  shell: umask 0022; /tmp/aws/install
+  args:
+    # Only run first-time install if not already installed before
+    creates: /usr/local/bin/aws
+
+- name: AWS CLI - Update system wide
+  shell: umask 0022; /tmp/aws/install --update
+  args:
+    # Only run update if already installed before
+    removes: /usr/local/bin/aws
