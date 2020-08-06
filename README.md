@@ -1,13 +1,14 @@
 # ansible
 
-Clean install of Ubuntu 20.04 Desktop 64-bit into a VMware VM.
+Just a handy ansible setup I use to quickly put together a VM with tools I use.
 
-First version is single playbook. Future work will break out into multiple roles so it can be applied to a headless (server only) or desktop environment.
+Clean install of Ubuntu 20.04 64-bit Desktop or server into a VM.
 
 `sudo apt-get install --assume-yes ansible git`
 
-`sudo ansible-pull --verbose --url https://github.com/rbeede/ansible.git --inventory localhost, pentest-machine-playbook.yaml`
+The , after localhost, is important.
+`sudo ansible-pull --verbose --url https://github.com/rbeede/ansible.git --inventory localhost, pentest-machine-gui-playbook.yaml`
 
-### Alternative
+### Alternative method with local copy
 
-`ansible-playbook --connection=local --inventory=localhost, pentest-machine-playbook.yaml`
+`ansible-playbook --connection=local --inventory=localhost, pentest-machine-gui-playbook.yaml`
