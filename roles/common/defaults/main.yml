@@ -3,6 +3,7 @@ useful_tools_headless:
   - curl
   - default-jdk-headless
   - nmap
+  - openvpn
   - vim
 
 
