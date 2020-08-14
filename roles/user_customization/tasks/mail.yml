@@ -1,6 +1,0 @@
-- import_tasks: setup_authentication
-
-- import_tasks: setup_home_files
-
-- import_tasks: setup_desktop_settings
-  tags: [ never, gui ]
