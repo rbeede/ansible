@@ -1,0 +1,39 @@
+- name: Update apt repo and cache
+  apt:
+    update_cache: yes
+    force_apt_get: yes
+    cache_valid_time: 3600
+
+# At this point do NOT apply all system updates as that can crash the current session and cause later ansible tasks to fail
+
+
+- name: Build list of packages to install
+  set_fact:
+    packages_to_install: "{{ useful_tools_headless }}"
+
+- name: Build list of packages to install if gui
+  set_fact:
+    packages_to_install: "{{ packages_to_install + useful_tools_gui }}"
+  tags: [ never, gui ]
+
+- name: Useful tools and packages
+  package:
+    state: present
+    name: "{{ packages_to_install }}"
+
+
+- name: Software tools directory
+  file:
+    path: /Software
+    owner: rbeede
+    group: rbeede
+    mode: 0700
+    state: directory
+  
+- name: Handy shell scripts
+  copy:
+    src: Software/  # from role's files/ directory
+    dest: /Software/
+    owner: rbeede
+    group: rbeede
+    mode: 0500

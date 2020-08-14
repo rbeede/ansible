@@ -1,0 +1,14 @@
+---
+useful_tools_headless:
+  - htop
+  - curl
+  - default-jdk-headless
+  - nmap
+  - openvpn
+  - vim
+
+
+useful_tools_gui:
+  - chromium-browser
+  - default-jdk
+  - simplescreenrecorder

@@ -1,0 +1,82 @@
+- name: Install needed ansible dconf dependency
+  package:
+    state: present
+    name: python3-psutil
+
+
+- name: Terminal font size
+  dconf:
+    key: "/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/font"
+    value: '"Monospace 18"'
+  become_user: rbeede
+
+- name: Terminal font size use custom
+  dconf:
+    key: "/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/use-system-font"
+    value: "false"
+  become_user: rbeede
+
+- name: Terminal don't use theme colors
+  dconf:
+    key: "/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/use-theme-colors"
+    value: "false"
+  become_user: rbeede
+
+- name: Terminal background-color
+  dconf:
+    key: "/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/background-color"
+    value: '"rgb(0,0,0)"'
+  become_user: rbeede
+
+- name: Terminal font color
+  dconf:
+    key: "/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/foreground-color"
+    value: '"rgb(0,255,0)"'
+  become_user: rbeede
+
+- name: Terminal size columns
+  dconf:
+    key: "/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/default-size-columns"
+    value: "60"
+  become_user: rbeede
+- name: Terminal size rows
+  dconf:
+    key: "/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/default-size-rows"
+    value: "40"
+  become_user: rbeede
+
+- name: Desktop background color
+  dconf:
+    key: "/org/gnome/desktop/background/primary-color"
+    value: '"rgb(0,0,0)"'
+  become_user: rbeede
+
+- name: Remove desktop image
+  dconf:
+    key: "/org/gnome/desktop/background/picture-uri"
+    value: '""'
+  become_user: rbeede
+
+- name: Disable screen lock
+  dconf:
+    key: "/org/gnome/desktop/screensaver/lock-enabled"
+    value: "false"
+  become_user: rbeede
+  
+- name: Disable lock on suspend
+  dconf:
+    key: "/org/gnome/desktop/screensaver/ubuntu-lock-on-suspend"
+    value: "false"
+  become_user: rbeede
+
+- name: Disable screen blanking
+  dconf:
+    key: "/org/gnome/desktop/session/idle-delay"
+    value: "0"
+  become_user: rbeede
+
+- name: Setup launcher favorites
+  dconf:
+    key: "/org/gnome/shell/favorite-apps"
+    value: "['firefox.desktop', 'org.gnome.Nautilus.desktop', 'chromium_chromium.desktop', 'org.gnome.Terminal.desktop']"
+  become_user: rbeede
