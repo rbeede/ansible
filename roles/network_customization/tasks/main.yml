@@ -22,7 +22,7 @@
   command: nmcli device modify "{{ network_interface }}"  ipv4.ignore-auto-dns true
 
 - name: Apply DNS changes
-  command: nmcli device up "{{ network_interface }}"
+  command: nmcli connection up ifname "{{ network_interface }}"
 
 - name: Show current DNS
   command: resolvectl status
