@@ -7,16 +7,15 @@
 # At this point do NOT apply all system updates as that can crash the current session and cause later ansible tasks to fail
 
 
-- name: List of combined packages to install
-  set_fact:
-    packages_to_install: []
 - name: Build list of packages to install
   set_fact:
     packages_to_install: "{{ useful_tools_headless }}"
+
 - name: Build list of packages to install if gui
   set_fact:
-    packages_to_install: "{{ packages_to_install + [ useful_tools_gui ] }}"
+    packages_to_install: "{{ packages_to_install + useful_tools_gui }}"
   tags: [ never, gui ]
+
 - name: Useful tools and packages
   package:
     state: present
