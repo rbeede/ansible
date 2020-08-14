@@ -1,7 +1,7 @@
 - name: Install needed ansible dconf dependency
   package:
-  state: present
-  name: python3-psutil
+    state: present
+    name: python3-psutil
 
 
 - name: Terminal font size
