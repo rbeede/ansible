@@ -16,10 +16,13 @@
 # bugs where it fails with Python module dependencies
 # So use a workaround instead
 - name: Ignore DHCP issued DNS
-  command: nmcli device modify "{{ network_interface }}"  ipv4.ignore-auto-dns true
+  command: nmcli connection modify "{{ network_connection_profile }}"  ipv4.ignore-auto-dns true
 
 - name: Set DNS via nmcli
-  command: nmcli device modify "{{ network_interface }}"  ipv4.dns "{{ dns }}"
+  command: nmcli connection modify "{{ network_connection_profile }}"  ipv4.dns "{{ dns }}"
+
+- name: Apply DNS changes
+  command: nmcli connection up "{{ network_connection_profile }}"
 
 - name: Show current DNS
   command: resolvectl status
