@@ -1,10 +1,9 @@
-pre_tasks:
-  - name: Install needed dependencies
-    package:
-      state: present
-      name:
-        # Used for getting user ssh key from github in user task later
-        - git
+- name: Install needed dependencies
+  package:
+    state: present
+    name:
+      # Used for getting user ssh key from github in user task later
+      - git
 
 - user:
     name: rbeede
