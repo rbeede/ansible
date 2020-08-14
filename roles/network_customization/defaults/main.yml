@@ -1,0 +1,5 @@
+---
+# space separated (up to 3 maximum)
+dns: 1.1.1.1
+
+network_interface: ens33

@@ -1,0 +1,19 @@
+- name: Remove unwanted network services
+  package:
+    state: absent
+    name: "{{ item }}"
+  loop:
+    - cups
+    - cups-daemon
+    - cups-server-common
+    - avahi-daemon
+    - avahi-utils
+    - libnss-mdns
+    - libavahi-core7
+
+
+- name: Set DNS to desired value
+  nmcli:
+    conn_name: "{{ network_interface }}"
+    dns4: "{{ dns }}"
+    state: present
