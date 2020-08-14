@@ -13,7 +13,7 @@
     
 - name: Build list of packages to install if gui
   set_fact:
-    packages_to_install: "{{ packages_to_install + useful_tools_gui}}"
+    packages_to_install: "{{ packages_to_install + useful_tools_gui }}"
   tags: [ never, gui ]
 
 - name: Useful tools and packages
