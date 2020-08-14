@@ -1,3 +1,14 @@
+- name: Install required Ansible dependencies for nmcli
+  package:
+    state: present
+    name: "{{ item }}"
+  loop:
+    - network-manager
+    - python3-dbus
+    - libnm-dev
+
+
+
 - name: Remove unwanted network services
   package:
     state: absent
