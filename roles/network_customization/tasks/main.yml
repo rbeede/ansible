@@ -1,14 +1,3 @@
-- name: Install required Ansible dependencies for nmcli
-  package:
-    state: present
-    name: "{{ item }}"
-  loop:
-    - network-manager
-    - python3-dbus
-    - libnm-dev
-
-
-
 - name: Remove unwanted network services
   package:
     state: absent
@@ -23,8 +12,17 @@
     - libavahi-core7
 
 
-- name: Set DNS to desired value
-  nmcli:
-    conn_name: "{{ network_interface }}"
-    dns4: "{{ dns }}"
-    state: present
+# Tried using Ansible's  nmcli  module but as of 2020-08-14 it still has
+# bugs where it fails with Python module dependencies
+# So use a workaround instead
+- name: Set DNS via nmcli
+  command: nmcli device modify "{{ network_interface }"  ipv4.dns "{{ dns }}"
+
+- name: Ignore DHCP issued DNS
+  command: nmcli device modify "{{ network_interface }"  ipv4.ignore-auto-dns true
+
+- name: Apply DNS changes
+  command: nmcli device up "{{ network_interface }"
+
+- name: Show current DNS
+  command: resolvectl status
