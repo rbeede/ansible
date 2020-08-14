@@ -1,8 +1,8 @@
 - name: Update apt repo and cache
-apt:
-  update_cache: yes
-  force_apt_get: yes
-  cache_valid_time: 3600
+  apt:
+    update_cache: yes
+    force_apt_get: yes
+    cache_valid_time: 3600
 
 # At this point do NOT apply all system updates as that can crash the current session and cause later ansible tasks to fail
 
