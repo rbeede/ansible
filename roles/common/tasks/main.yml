@@ -19,7 +19,7 @@
 - name: Useful tools and packages
   package:
     state: present
-    name: {{packages_to_install}}
+    name: "{{ packages_to_install }}"
 
 
 - name: Software tools directory
