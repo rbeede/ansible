@@ -75,12 +75,6 @@
     value: "uint32 0"
   become_user: rbeede
 
-- name: Disable power blank screen
-  dconf:
-    key: "/org/gnome/settings-daemon/plugins/power/sleep-inactive-ac-type"
-    value: ""
-  become_user: rbeede
-
 - name: Setup launcher favorites
   dconf:
     key: "/org/gnome/shell/favorite-apps"
