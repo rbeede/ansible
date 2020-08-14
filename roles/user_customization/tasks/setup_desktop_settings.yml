@@ -72,7 +72,13 @@
 - name: Disable screen blanking
   dconf:
     key: "/org/gnome/desktop/session/idle-delay"
-    value: "0"
+    value: "uint32 0"
+  become_user: rbeede
+
+- name: Disable power blank screen
+  dconf:
+    key: "/org/gnome/settings-daemon/plugins/power/sleep-inactive-ac-type"
+    value: "nothing"
   become_user: rbeede
 
 - name: Setup launcher favorites
