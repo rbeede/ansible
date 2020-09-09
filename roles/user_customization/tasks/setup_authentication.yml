@@ -8,8 +8,17 @@
 - user:
     name: rbeede
     password: ""
+    shell: "/bin/bash"
 
 - authorized_key:
     user: rbeede
     state: present
     key: https://github.com/rbeede.keys
+
+- name: sudoers for rbeede
+  copy:
+    dest: /etc/sudoers.d/rbeede
+    owner: root
+    group: root
+    mode: '0400'
+    content: 'rbeede ALL=(ALL) NOPASSWD:ALL'
