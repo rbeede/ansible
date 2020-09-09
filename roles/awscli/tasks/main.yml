@@ -1,3 +1,9 @@
+- name: Install needed ansible dependency
+  package:
+    state: present
+    name: unzip
+
+
 - name: AWS CLI (OS bundled) removed
   package:
     name: aws-cli
