@@ -12,4 +12,5 @@ useful_tools_headless:
 useful_tools_gui:
   - chromium-browser
   - default-jdk
+  - libnss3-tools
   - simplescreenrecorder
