@@ -5,6 +5,7 @@ useful_tools_headless:
   - default-jdk-headless
   - nmap
   - openvpn
+  - slowhttptest
   - sysstat
   - vim
 
