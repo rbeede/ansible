@@ -8,6 +8,7 @@ useful_tools_headless:
   - slowhttptest
   - sysstat
   - vim
+  - xsel
 
 
 useful_tools_gui:
