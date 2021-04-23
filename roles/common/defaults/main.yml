@@ -7,6 +7,7 @@ useful_tools_headless:
   - openvpn
   - python3-boto3
   - python3-pip
+  - python3-virtualenv
   - slowhttptest
   - sysstat
   - vim
