@@ -37,12 +37,12 @@
 - name: Terminal size columns
   dconf:
     key: "/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/default-size-columns"
-    value: "60"
+    value: "70"
   become_user: rbeede
 - name: Terminal size rows
   dconf:
     key: "/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/default-size-rows"
-    value: "40"
+    value: "50"
   become_user: rbeede
 
 - name: Desktop background color
