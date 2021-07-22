@@ -3,9 +3,11 @@ useful_tools_headless:
   - htop
   - curl
   - default-jdk-headless
+  - jq
   - nload
   - nmap
   - openvpn
+  - p7zip-full
   - python3-boto3
   - python3-pip
   - python3-virtualenv
