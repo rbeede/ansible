@@ -17,20 +17,25 @@
     manager: auto
 
 
+# Only changes DNS for GUI OS installs tha thave network-manager
+#
 # Tried using Ansible's  nmcli  module but as of 2020-08-14 it still has
 # bugs where it fails with Python module dependencies
 # So use a workaround instead
 - name: Ignore DHCP issued DNS
   command: nmcli connection modify "{{ network_connection_profile }}"  ipv4.ignore-auto-dns true
   when: "'network-manager' in ansible_facts.packages"
+  tags: [ never, gui ]
 
 - name: Set DNS via nmcli
   command: nmcli connection modify "{{ network_connection_profile }}"  ipv4.dns "{{ dns }}"
   when: "'network-manager' in ansible_facts.packages"
+  tags: [ never, gui ]
 
 - name: Apply DNS changes
   command: nmcli connection up "{{ network_connection_profile }}"
   when: "'network-manager' in ansible_facts.packages"
+  tags: [ never, gui ]
 
 - name: Show current DNS
   command: resolvectl status
