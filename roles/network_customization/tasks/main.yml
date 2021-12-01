@@ -17,7 +17,7 @@
     manager: auto
 
 
-# Only changes DNS for GUI OS installs tha thave network-manager
+# Only changes DNS for GUI OS installs that have network-manager
 #
 # Tried using Ansible's  nmcli  module but as of 2020-08-14 it still has
 # bugs where it fails with Python module dependencies
