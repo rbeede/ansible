@@ -1,8 +1,9 @@
 ---
 useful_tools_headless:
-  - htop
+  - binwalk
   - curl
   - default-jdk-headless
+  - htop
   - jq
   - nload
   - nmap
