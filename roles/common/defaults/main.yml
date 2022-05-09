@@ -8,6 +8,7 @@ useful_tools_headless:
   - nload
   - nmap
   - p7zip-full
+  - parallel
   - python3-boto3
   - python3-pip
   - python3-virtualenv
