@@ -15,7 +15,6 @@ useful_tools_headless:
   - resolvconf
   - slowhttptest
   - sysstat
-  - testssl.sh
   - vim
   - wireguard
   - xsel
