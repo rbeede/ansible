@@ -17,3 +17,5 @@ export NO_PROXY=169.254.169.254
 aws --version
 
 aws configure list-profiles
+
+set +o xtrace
