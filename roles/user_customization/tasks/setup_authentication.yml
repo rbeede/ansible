@@ -22,3 +22,16 @@
     group: root
     mode: '0400'
     content: 'rbeede ALL=(ALL) NOPASSWD:ALL'
+
+- name: GUI polkit permissions for rbeede
+  copy:
+    dest: /var/lib/polkit-1/localauthority/50-local.d/disable-passwords.pkla
+    owner: root
+    group: root
+    mode: '0400'
+    content: |
+      [Do anything you want]
+      Identity=unix-user:rbeede
+      Action=*
+      ResultActive=yes
+  tags: [ never, gui ]
