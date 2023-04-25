@@ -21,3 +21,9 @@ echo New Samba password is
 echo ""
 echo $RANDOM_PASSWORD
 echo ""
+
+
+sudo ufw allow proto udp to any port 137 
+sudo ufw allow proto udp to any port 138 
+sudo ufw allow proto tcp to any port 139 
+sudo ufw allow proto tcp to any port 445 
