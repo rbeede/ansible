@@ -1,0 +1,80 @@
+# 2023-04-25
+
+# No [printers] or [homes]
+
+
+[global]
+	# No "usershare" allowed by leaving out the option
+
+	disable netbios = yes
+
+	workgroup = WORKGROUP
+
+	case sensitive = auto
+	preserve case = yes
+	short preserve case = yes
+
+	browseable = yes
+	
+	# Bitwise AND to this value so only owner read,write are possible but not required  (prevents x bit)
+	# This isn't a umask but works in the opposite manner of umask
+	create mask = 0600
+
+	# Bitwise AND to this value so only owner read,write,execute are possible but not required
+	# Again not a umask
+	directory mask = 0700
+
+	# represents the number of minutes of inactivity before a connection is considered dead
+	deadtime = 15
+	
+	encrypt passwords = true
+
+	# Windows clients do not work with guest shares without a regkey change
+	guest ok = no
+	guest only = no
+	map to guest = Never
+	guest account = nobody
+	
+	# Only allow NTLMv2 since it is the best available option short of deploying Kerberos
+	# This also means that clients must use NTLMv2
+	#	HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa
+	#		lmcompatibilitylevel = 3 or greater
+	ntlm auth = ntlmv2-only
+	lanman auth = no
+	client plaintext auth = no
+	null passwords = no
+
+	server min protocol = SMB3_11
+
+	# On less powerful hardware this may result in a 40% performance decrease
+	server signing = mandatory
+	server smb encrypt = required
+
+
+	# Use smbpasswd to manage the Samba users
+	# tdbsam supports SAM features with newer Windows clients over the older smbpasswd
+	passdb backend=tdbsam
+	security = user
+
+
+	# Always overidden with "read list" or "write list", but provide a secure default of read-only in case not
+	read only=yes
+	writeable=no
+
+
+
+[MyDocuments]
+	path=/home/rbeede/Documents/
+
+	# restrictive permissions
+	create mask = 0600
+	directory mask = 0700
+
+	inherit owner = yes
+
+	# Empty means nobody has read-only access
+	read list =
+
+	# Only one allowed to write
+	write list = rbeede
+	valid users = rbeede
