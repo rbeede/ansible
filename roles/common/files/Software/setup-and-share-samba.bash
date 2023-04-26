@@ -22,6 +22,12 @@ echo ""
 echo $RANDOM_PASSWORD
 echo ""
 
+MY_IPADDRESS=$(ip -o route get to 8.8.8.8 | grep -Po 'src [0-9.]+' | grep -Po '[0-9.]+')
+echo "NET USE \\\\$MY_IPADDRESS /DELETE"
+echo ""
+echo "NET USE \\\\$MY_IPADDRESS $RANDOM_PASSWORD /USER:rbeede"
+echo ""
+
 
 sudo ufw allow proto udp to any port 137 
 sudo ufw allow proto udp to any port 138 
