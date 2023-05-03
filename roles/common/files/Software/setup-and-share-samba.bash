@@ -27,6 +27,8 @@ echo "NET USE \\\\$MY_IPADDRESS /DELETE"
 echo ""
 echo "NET USE \\\\$MY_IPADDRESS $RANDOM_PASSWORD /USER:rbeede"
 echo ""
+echo "explorer \\\\$MY_IPADDRESS"
+echo ""
 
 
 sudo ufw allow proto udp to any port 137 
