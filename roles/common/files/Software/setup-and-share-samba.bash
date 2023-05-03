@@ -15,7 +15,7 @@ sudo systemctl restart smbd
 
 RANDOM_PASSWORD=$(tr -dc A-Za-z0-9 </dev/urandom | head -c 40)
 
-(echo $RANDOM_PASSWORD; echo $RANDOM_PASSWORD) | sudo smbpasswd -s -L rbeede
+(echo $RANDOM_PASSWORD; echo $RANDOM_PASSWORD) | sudo smbpasswd -a -L rbeede
 
 echo New Samba password is
 echo ""
