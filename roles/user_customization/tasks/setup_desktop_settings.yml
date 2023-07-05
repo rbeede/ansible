@@ -7,7 +7,7 @@
 - name: Terminal font size
   dconf:
     key: "/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/font"
-    value: '"Monospace 18"'
+    value: '"Monospace 24"'
   become_user: rbeede
 
 - name: Terminal font size use custom
