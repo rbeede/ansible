@@ -1,6 +1,6 @@
 ---
 useful_tools_headless:
-  - aria2c
+  - aria2
   - binwalk
   - curl
   - default-jdk-headless
