@@ -82,7 +82,7 @@
 - name: Setup launcher favorites
   dconf:
     key: "/org/gnome/shell/favorite-apps"
-    value: "['firefox.desktop', 'org.gnome.Nautilus.desktop', 'org.gnome.Terminal.desktop']"
+    value: "['google-chrome.desktop', 'firefox.desktop', 'org.gnome.Nautilus.desktop', 'org.gnome.Terminal.desktop']"
   become_user: rbeede
 
 - name: Remove Home icon from desktop
