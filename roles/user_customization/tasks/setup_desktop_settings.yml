@@ -3,6 +3,10 @@
     state: present
     name: python3-psutil
 
+- name: Remove Chromium
+  package:
+    state: absent
+    name: chromium-browser
 
 - name: Terminal font size
   dconf:
@@ -78,7 +82,7 @@
 - name: Setup launcher favorites
   dconf:
     key: "/org/gnome/shell/favorite-apps"
-    value: "['firefox.desktop', 'org.gnome.Nautilus.desktop', 'chromium_chromium.desktop', 'org.gnome.Terminal.desktop']"
+    value: "['firefox.desktop', 'org.gnome.Nautilus.desktop', 'org.gnome.Terminal.desktop']"
   become_user: rbeede
 
 - name: Remove Home icon from desktop
