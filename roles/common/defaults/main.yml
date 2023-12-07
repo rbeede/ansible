@@ -26,3 +26,26 @@ useful_tools_gui:
   - default-jdk
   - libnss3-tools
   - simplescreenrecorder
+
+
+packages_to_uninstall:
+  - evolution
+  - slack
+  - slack-desktop
+  - aisleriot
+  - gnome-mahjongg
+  - gnome-mines
+  - pidgin pidgin-data
+  - rhythmbox
+  - rhythmbox-data
+  - rhythmbox-plugin-alternative-toolbar
+  - rhythmbox-plugins
+  - gnome-sudoku
+  - thunderbird
+  - thunderbird-gnome-support
+  - thunderbird-locale-en
+  - thunderbird-locale-en-us
+  - gnome-todo
+  - gnome-todo-common
+  - transmission-common
+  - transmission-gtk
