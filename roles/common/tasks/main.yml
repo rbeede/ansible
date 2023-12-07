@@ -21,6 +21,10 @@
     state: present
     name: "{{ packages_to_install }}"
 
+- name: Remove unneeded packages
+  package:
+    state: absent
+    name: "{{ packages_to_uninstall }}"
 
 - name: Software tools directory
   file:
