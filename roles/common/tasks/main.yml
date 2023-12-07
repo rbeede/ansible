@@ -26,6 +26,11 @@
     state: absent
     name: "{{ packages_to_uninstall }}"
 
+- name: Remove snap
+  community.general.snap:
+    name: chromium
+    state: absent
+
 - name: Software tools directory
   file:
     path: /Software
