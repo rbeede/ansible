@@ -4,3 +4,6 @@
 
 - import_tasks: setup_desktop_settings.yml
   tags: [ never, gui ]
+
+- import_tasks: install_google_chrome.yml
+  tags: [ never, gui ]
