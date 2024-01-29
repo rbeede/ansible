@@ -16,7 +16,6 @@
   community.general.snap:
     name:
       - chromium
-      - firefox
     state: absent
 
 - name: Build list of packages to install
