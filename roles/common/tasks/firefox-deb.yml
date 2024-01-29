@@ -12,7 +12,7 @@
 
 - name: Apt Sources
   ansible.builtin.copy:
-    dest: /etc/apt/sources.list.d/mozilla.lis
+    dest: /etc/apt/sources.list.d/mozilla.list
     content: "deb [signed-by=/etc/apt/keyrings/packages.mozilla.org.apt.repo-signing-key.gpg] https://packages.mozilla.org/apt mozilla main"
     owner: root
     group: root
