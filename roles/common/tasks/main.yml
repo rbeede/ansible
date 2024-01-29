@@ -7,6 +7,18 @@
 # At this point do NOT apply all system updates as that can crash the current session and cause later ansible tasks to fail
 
 
+- name: Remove unneeded packages
+  package:
+    state: absent
+    name: "{{ packages_to_uninstall }}"
+
+- name: Remove unwanted snaps
+  community.general.snap:
+    name:
+      - chromium
+      - firefox
+    state: absent
+
 - name: Build list of packages to install
   set_fact:
     packages_to_install: "{{ useful_tools_headless }}"
@@ -20,16 +32,6 @@
   package:
     state: present
     name: "{{ packages_to_install }}"
-
-- name: Remove unneeded packages
-  package:
-    state: absent
-    name: "{{ packages_to_uninstall }}"
-
-- name: Remove snap
-  community.general.snap:
-    name: chromium
-    state: absent
 
 - name: Software tools directory
   file:
