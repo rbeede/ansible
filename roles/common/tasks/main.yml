@@ -48,3 +48,7 @@
     owner: rbeede
     group: rbeede
     mode: 0500
+
+- name: Deb Firefox not snap
+  import_tasks: firefox-deb.yml
+  tags: [ never, gui ]
