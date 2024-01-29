@@ -49,5 +49,5 @@
     mode: 0500
 
 - name: Deb Firefox not snap
-  import_tasks: firefox-deb.yml
+  import_tasks: firefox_deb.yml
   tags: [ never, gui ]
