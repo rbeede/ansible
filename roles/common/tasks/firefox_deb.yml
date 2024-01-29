@@ -20,7 +20,7 @@
 
 - name: Prefer Mozilla Deb
   ansible.builtin.copy:
-    dest: /etc/apt/preferences.d/mozilla.org
+    dest: /etc/apt/preferences.d/mozilla
     content: |
       Package: *
       Pin: origin packages.mozilla.org
