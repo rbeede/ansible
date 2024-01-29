@@ -1,1 +1,41 @@
+- name: Remove unwanted snap
+  community.general.snap:
+    name:
+      - firefox
+    state: absent
 
+- name: Mozilla Repo Signing Key
+  ansible.builtin.get_url:
+    url: https://packages.mozilla.org/apt/repo-signing-key.gpg
+    dest: /etc/apt/keyrings/packages.mozilla.org.apt.repo-signing-key.gpg
+    mode: '0444'
+
+- name: Apt Sources
+  ansible.builtin.copy:
+    dest: /etc/apt/sources.list.d/mozilla.lis
+    content: "deb [signed-by=/etc/apt/keyrings/packages.mozilla.org.apt.repo-signing-key.gpg] https://packages.mozilla.org/apt mozilla main"
+    owner: root
+    group: root
+    mode: '0444'
+
+- name: Prefer Mozilla Deb
+  ansible.builtin.copy:
+    dest: /etc/apt/preferences.d/mozilla.org
+    content: |
+      Package: *
+      Pin: origin packages.mozilla.org
+      Pin-Priority: 1000
+      owner: root
+    group: root
+    mode: '0444'
+
+- name: Update apt repo and cache
+  apt:
+    update_cache: yes
+    force_apt_get: yes
+    cache_valid_time: 3600
+
+- name: Package manager install Firefox
+  package:
+    state: present
+    name: "firefox"
