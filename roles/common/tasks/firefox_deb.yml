@@ -7,13 +7,13 @@
 - name: Mozilla Repo Signing Key
   ansible.builtin.get_url:
     url: https://packages.mozilla.org/apt/repo-signing-key.gpg
-    dest: /etc/apt/keyrings/packages.mozilla.org.apt.repo-signing-key.gpg
+    dest: /etc/apt/keyrings/packages.mozilla.org.apt.repo-signing-key.asc
     mode: '0444'
 
 - name: Apt Sources
   ansible.builtin.copy:
     dest: /etc/apt/sources.list.d/mozilla.list
-    content: "deb [signed-by=/etc/apt/keyrings/packages.mozilla.org.apt.repo-signing-key.gpg] https://packages.mozilla.org/apt mozilla main"
+    content: "deb [signed-by=/etc/apt/keyrings/packages.mozilla.org.apt.repo-signing-key.asc] https://packages.mozilla.org/apt mozilla main\n"
     owner: root
     group: root
     mode: '0444'
