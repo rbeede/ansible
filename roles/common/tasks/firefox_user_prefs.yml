@@ -3,6 +3,7 @@
     cmd: firefox --headless --marionette
     creates: "/home/rbeede/.mozilla/firefox/*.default-release"
   async: 20
+  poll: 0
 
 - name: Close Firefox Marionette
   ansible.builtin.command:
