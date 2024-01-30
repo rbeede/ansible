@@ -1,7 +1,7 @@
 - name: Ensure Firefox default profile folder exists
   ansible.builtin.command:
     cmd: firefox --headless --marionette
-  creates: "/home/rbeede/.mozilla/firefox/*.default-release"
+    creates: "/home/rbeede/.mozilla/firefox/*.default-release"
   async: 20
 
 - name: Close Firefox Marionette
