@@ -11,7 +11,7 @@ sudo apt-get install --assume-yes ansible git
 
 The comma at the end of inventory , is important.
 ```
-sudo ansible-pull --verbose --url https://github.com/rbeede/ansible.git --inventory `hostname`, --tags all,gui pentest-machine-playbook.yml
+sudo ansible-pull --url https://github.com/rbeede/ansible.git --inventory `hostname`, --tags all,gui pentest-machine-playbook.yml
 ```
 
 ### Alternative method with local copy
