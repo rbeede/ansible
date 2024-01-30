@@ -51,3 +51,7 @@
 - name: Deb Firefox not snap
   import_tasks: firefox_deb.yml
   tags: [ never, gui ]
+
+- name: Firefox settings
+  import_tasks: firefox_user_prefs.yml
+  tags: [ never, gui ]
