@@ -5,6 +5,11 @@
   async: 20
   poll: 0
 
+- name: test
+  ansible.builtin.command:
+    cmd: ps -ef | grep firefox
+    creates: "/home/rbeede/.mozilla/firefox/*.default-release"
+
 - name: Close Firefox Marionette
   ansible.builtin.command:
     cmd: echo '37:[0, 1234, "WebDriver:NewSession", {}]32:[0, 1235, "Marionette:Quit", {}]' | nc localhost 2828
