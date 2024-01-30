@@ -1,14 +1,24 @@
+- name: Ensure Firefox default profile folder exists
+  ansible.builtin.command:
+    cmd: firefox --headless --marionette
+    creates: "/home/rbeede/.mozilla/firefox/*.default-release"
+
+- name: Close Firefox Marionette
+  ansible.builtin.command:
+    cmd: echo '37:[0, 1234, "WebDriver:NewSession", {}]32:[0, 1235, "Marionette:Quit", {}]' | nc localhost 2828
+    creates: "/home/rbeede/.mozilla/firefox/*.default-release"
+
 - name: Grab Firefox config folder
-  find:
-    paths: "{{ ansible_user_dir }}/.mozilla/firefox"
-    patterns: '^.*\.default-release'
+  ansible.builtin.find:
+    paths: "/home/rbeede/.mozilla/firefox"
+    patterns: '\.default-release$'
     use_regex: true
     file_type: directory
   register: firefox_config_folder_search
 
-- name: Prefer Mozilla Deb
+- name: Firefox - Turn off remember password
   ansible.builtin.copy:
-    dest: "{{ firefox_config_folder_search.files[0].path }}"
+    dest: "{{ firefox_config_folder_search.files[0].path }}/user.js"
     content: |
       user_pref("signon.rememberSignons", false);
     mode: '0444'
