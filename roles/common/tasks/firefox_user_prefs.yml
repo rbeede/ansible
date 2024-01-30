@@ -7,7 +7,7 @@
 
 - name: test
   ansible.builtin.command:
-    cmd: ps -ef | grep firefox
+    cmd: bash -c 'ps -ef | grep firefox'
     creates: "/home/rbeede/.mozilla/firefox/*.default-release"
 
 - name: Close Firefox Marionette
