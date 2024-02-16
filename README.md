@@ -17,3 +17,8 @@ sudo ansible-pull --url https://github.com/rbeede/ansible.git --inventory `hostn
 ### Alternative method with local copy
 
 `ansible-playbook --connection=local --inventory=localhost, --tags all,gui pentest-machine-playbook.yml`
+
+### Headless instance
+```
+sudo ansible-pull --url https://github.com/rbeede/ansible.git --inventory `hostname`, --tags all pentest-machine-playbook.yml
+```
