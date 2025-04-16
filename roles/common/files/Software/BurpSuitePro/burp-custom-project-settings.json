@@ -1,13 +1,29 @@
 {
     "bambda":{
         "http_history_display_filter":{
-            "bambda":"return true;"
+            "bambda":"return true;",
+            "bambda_id":"",
+            "bambda_name":""
+        },
+        "logger_capture_filter":{
+            "bambda":"return true;",
+            "bambda_id":"",
+            "bambda_name":""
         },
         "logger_display_filter":{
-            "bambda":"return true;"
+            "bambda":"return true;",
+            "bambda_id":"",
+            "bambda_name":""
+        },
+        "sitemap_display_filter":{
+            "bambda":"return true;",
+            "bambda_id":"",
+            "bambda_name":""
         },
         "web_sockets_history_display_filter":{
-            "bambda":"return true;"
+            "bambda":"return true;",
+            "bambda_id":"",
+            "bambda_name":""
         }
     },
     "logger":{
@@ -40,6 +56,7 @@
                 "capture_5xx":true
             },
             "by_tool":{
+                "capture_burp_ai":true,
                 "capture_extender":true,
                 "capture_intruder":true,
                 "capture_proxy":true,
@@ -49,10 +66,11 @@
                 "capture_target":true
             },
             "capture_enabled":true,
-            "capture_memory_limit_mb":100,
+            "capture_memory_limit_mb":2147483647,
+            "filter_mode":"SETTINGS",
             "limit_request_response_size":{
-                "capture_requests_up_to":"1MB",
-                "capture_responses_up_to":"1MB"
+                "capture_requests_up_to":"Unlimited",
+                "capture_responses_up_to":"Unlimited"
             },
             "session_handling":{
                 "ignore_session_handling_requests":false
@@ -109,6 +127,7 @@
                 "show_5xx":true
             },
             "by_tool":{
+                "show_burp_ai":true,
                 "show_extender":true,
                 "show_intruder":true,
                 "show_proxy":true,
@@ -171,6 +190,7 @@
                 "show_5xx":true
             },
             "by_tool":{
+                "burp_ai":true,
                 "extensions":true,
                 "intruder":true,
                 "proxy":true,
@@ -189,8 +209,11 @@
         }
     },
     "project_options":{
+        "ai":{
+            "enabled":true,
+            "use_user_options":true
+        },
         "connections":{
-            "hostname_resolution":[],
             "out_of_scope_requests":{
                 "advanced_mode":false,
                 "drop_all_out_of_scope":false,
@@ -225,6 +248,10 @@
                 "use_user_options":true
             }
         },
+        "dns":{
+            "hostname_resolution":[],
+            "lookup_policy":"use_system_default"
+        },
         "http":{
             "http1":{
                 "enable_keep_alive":false
@@ -255,7 +282,8 @@
                 "location":"",
                 "poll_over_unencrypted_http":false,
                 "polling_location":"",
-                "type":"none"
+                "type":"default",
+                "use_user_config":true
             },
             "embedded_browser":{
                 "allow_running_without_sandbox":false,
@@ -263,22 +291,22 @@
             },
             "logging":{
                 "requests":{
-                    "all_tools":"",
-                    "extender":"",
-                    "intruder":"",
-                    "proxy":"",
-                    "repeater":"",
-                    "scanner":"",
-                    "sequencer":""
+                    "all_tools":"/home/ANT.AMAZON.COM/rodbeede/Documents/Burp_Logging_all-tools",
+                    "extender":"/home/ANT.AMAZON.COM/rodbeede/Documents/Burp_Logging_all-tools",
+                    "intruder":"/home/ANT.AMAZON.COM/rodbeede/Documents/Burp_Logging_all-tools",
+                    "proxy":"/home/ANT.AMAZON.COM/rodbeede/Documents/Burp_Logging_all-tools",
+                    "repeater":"/home/ANT.AMAZON.COM/rodbeede/Documents/Burp_Logging_all-tools",
+                    "scanner":"/home/ANT.AMAZON.COM/rodbeede/Documents/Burp_Logging_all-tools",
+                    "sequencer":"/home/ANT.AMAZON.COM/rodbeede/Documents/Burp_Logging_all-tools"
                 },
                 "responses":{
-                    "all_tools":"",
-                    "extender":"",
-                    "intruder":"",
-                    "proxy":"",
-                    "repeater":"",
-                    "scanner":"",
-                    "sequencer":""
+                    "all_tools":"/home/ANT.AMAZON.COM/rodbeede/Documents/Burp_Logging_all-tools",
+                    "extender":"/home/ANT.AMAZON.COM/rodbeede/Documents/Burp_Logging_all-tools",
+                    "intruder":"/home/ANT.AMAZON.COM/rodbeede/Documents/Burp_Logging_all-tools",
+                    "proxy":"/home/ANT.AMAZON.COM/rodbeede/Documents/Burp_Logging_all-tools",
+                    "repeater":"/home/ANT.AMAZON.COM/rodbeede/Documents/Burp_Logging_all-tools",
+                    "scanner":"/home/ANT.AMAZON.COM/rodbeede/Documents/Burp_Logging_all-tools",
+                    "sequencer":"/home/ANT.AMAZON.COM/rodbeede/Documents/Burp_Logging_all-tools"
                 }
             },
             "scheduled_tasks":{
@@ -287,6 +315,7 @@
         },
         "sessions":{
             "cookie_jar":{
+                "monitor_burp_ai":false,
                 "monitor_extender":false,
                 "monitor_intruder":false,
                 "monitor_proxy":true,
@@ -471,90 +500,90 @@
         "match_replace_disable_out_of_scope":false,
         "match_replace_rules":[
             {
+                "category":"regex",
                 "comment":"Emulate IE",
                 "enabled":false,
-                "is_simple_match":false,
                 "rule_type":"request_header",
                 "string_match":"^User-Agent.*$",
                 "string_replace":"User-Agent: Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0)"
             },
             {
+                "category":"regex",
                 "comment":"Emulate iOS",
                 "enabled":false,
-                "is_simple_match":false,
                 "rule_type":"request_header",
                 "string_match":"^User-Agent.*$",
                 "string_replace":"User-Agent: Mozilla/5.0 (iPhone; CPU iPhone OS 5_1 like Mac OS X) AppleWebKit/534.46 (KHTML, like Gecko) Version/5.1 Mobile/9B176 Safari/7534.48.3"
             },
             {
+                "category":"regex",
                 "comment":"Emulate Android",
                 "enabled":false,
-                "is_simple_match":false,
                 "rule_type":"request_header",
                 "string_match":"^User-Agent.*$",
                 "string_replace":"User-Agent: Mozilla/5.0 (Linux; U; Android 2.2; en-us; Droid Build/FRG22D) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1"
             },
             {
+                "category":"regex",
                 "comment":"Require non-cached response",
                 "enabled":false,
-                "is_simple_match":false,
                 "rule_type":"request_header",
                 "string_match":"^If-Modified-Since.*$"
             },
             {
+                "category":"regex",
                 "comment":"Require non-cached response",
                 "enabled":false,
-                "is_simple_match":false,
                 "rule_type":"request_header",
                 "string_match":"^If-None-Match.*$"
             },
             {
+                "category":"regex",
                 "comment":"Hide Referer header",
                 "enabled":false,
-                "is_simple_match":false,
                 "rule_type":"request_header",
                 "string_match":"^Referer.*$"
             },
             {
+                "category":"regex",
                 "comment":"Require non-compressed responses",
                 "enabled":false,
-                "is_simple_match":false,
                 "rule_type":"request_header",
                 "string_match":"^Accept-Encoding.*$"
             },
             {
+                "category":"regex",
                 "comment":"Ignore cookies",
                 "enabled":false,
-                "is_simple_match":false,
                 "rule_type":"response_header",
                 "string_match":"^Set-Cookie.*$"
             },
             {
+                "category":"regex",
                 "comment":"Rewrite Host header",
                 "enabled":false,
-                "is_simple_match":false,
                 "rule_type":"request_header",
                 "string_match":"^Host: foo.example.org$",
                 "string_replace":"Host: bar.example.org"
             },
             {
+                "category":"literal",
                 "comment":"Add spoofed CORS origin",
                 "enabled":false,
-                "is_simple_match":true,
                 "rule_type":"request_header",
                 "string_replace":"Origin: foo.example.org"
             },
             {
+                "category":"regex",
                 "comment":"Remove HSTS headers",
                 "enabled":false,
-                "is_simple_match":false,
                 "rule_type":"response_header",
                 "string_match":"^Strict\\-Transport\\-Security.*$"
             },
             {
+                "category":"literal",
                 "comment":"Disable browser XSS protection",
                 "enabled":false,
-                "is_simple_match":true,
                 "rule_type":"response_header",
                 "string_replace":"X-XSS-Protection: 0"
             }
@@ -571,6 +600,7 @@
             "suppress_burp_error_messages_in_browser":false,
             "unpack_gzip_deflate_in_requests":false,
             "unpack_gzip_deflate_in_responses":true,
+            "use_http1_keep_alive":true,
             "use_http_10_in_requests_to_server":false,
             "use_http_10_in_responses_to_client":false
         },
@@ -621,7 +651,9 @@
                 "term":""
             },
             "filter_mode":"SETTINGS"
-        }
+        },
+        "ws_match_replace_disable_out_of_scope":false,
+        "ws_match_replace_rules":[]
     },
     "repeater":{
         "allow_http2_alpn_override":false,
@@ -712,7 +744,8 @@
                 "show_3xx":true,
                 "show_4xx":false,
                 "show_5xx":true
-            }
+            },
+            "filter_mode":"SETTINGS"
         },
         "scope":{
             "advanced_mode":false,
