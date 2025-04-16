@@ -291,22 +291,22 @@
             },
             "logging":{
                 "requests":{
-                    "all_tools":"/home/ANT.AMAZON.COM/rodbeede/Documents/Burp_Logging_all-tools",
-                    "extender":"/home/ANT.AMAZON.COM/rodbeede/Documents/Burp_Logging_all-tools",
-                    "intruder":"/home/ANT.AMAZON.COM/rodbeede/Documents/Burp_Logging_all-tools",
-                    "proxy":"/home/ANT.AMAZON.COM/rodbeede/Documents/Burp_Logging_all-tools",
-                    "repeater":"/home/ANT.AMAZON.COM/rodbeede/Documents/Burp_Logging_all-tools",
-                    "scanner":"/home/ANT.AMAZON.COM/rodbeede/Documents/Burp_Logging_all-tools",
-                    "sequencer":"/home/ANT.AMAZON.COM/rodbeede/Documents/Burp_Logging_all-tools"
+                    "all_tools":"/tmp/Burp_Logging_all-tools",
+                    "extender":"/tmp/Burp_Logging_all-tools",
+                    "intruder":"/tmp/Burp_Logging_all-tools",
+                    "proxy":"/tmp/Burp_Logging_all-tools",
+                    "repeater":"/tmp/Burp_Logging_all-tools",
+                    "scanner":"/tmp/Burp_Logging_all-tools",
+                    "sequencer":"/tmp/Burp_Logging_all-tools"
                 },
                 "responses":{
-                    "all_tools":"/home/ANT.AMAZON.COM/rodbeede/Documents/Burp_Logging_all-tools",
-                    "extender":"/home/ANT.AMAZON.COM/rodbeede/Documents/Burp_Logging_all-tools",
-                    "intruder":"/home/ANT.AMAZON.COM/rodbeede/Documents/Burp_Logging_all-tools",
-                    "proxy":"/home/ANT.AMAZON.COM/rodbeede/Documents/Burp_Logging_all-tools",
-                    "repeater":"/home/ANT.AMAZON.COM/rodbeede/Documents/Burp_Logging_all-tools",
-                    "scanner":"/home/ANT.AMAZON.COM/rodbeede/Documents/Burp_Logging_all-tools",
-                    "sequencer":"/home/ANT.AMAZON.COM/rodbeede/Documents/Burp_Logging_all-tools"
+                    "all_tools":"/tmp/Burp_Logging_all-tools",
+                    "extender":"/tmp/Burp_Logging_all-tools",
+                    "intruder":"/tmp/Burp_Logging_all-tools",
+                    "proxy":"/tmp/Burp_Logging_all-tools",
+                    "repeater":"/tmp/Burp_Logging_all-tools",
+                    "scanner":"/tmp/Burp_Logging_all-tools",
+                    "sequencer":"/tmp/Burp_Logging_all-tools"
                 }
             },
             "scheduled_tasks":{
