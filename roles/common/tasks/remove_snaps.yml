@@ -14,13 +14,13 @@
       - firefox
       - firmware-updater
       - thunderbird
-      - snap-store
     state: absent
   when: snap_installed
 
 - name: Remove core snap
   community.general.snap:
     name:
+      - snap-store
       - gtk-common-themes
       - gnome-42-2204
       - snapd-desktop-integration
