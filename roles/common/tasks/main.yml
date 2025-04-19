@@ -15,14 +15,11 @@
 - name: Remove unwanted snaps
   community.general.snap:
     name:
-      - bare
-      - core22
       - firefox
       - firmware-updater
       - gnome-42-2204
       - gtk-common-themes
       - snap-store
-      - snapd
       - snapd-desktop-integration
       - thunderbird
     state: absent
