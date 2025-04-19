@@ -1,9 +1,10 @@
-# Check to see if it was already removed
-- name: Check if command does exist
-  ansible.builtin.raw: which snap
-  check_mode: false
-  changed_when: false
-    register: which_snap_result
+- name: Check to see if snapd was already removed
+  command: "which snap"
+  register: which_snap_command_result
+
+- name: Set useful variable
+  set_fact:
+    snap_installed: "{{ which_snap_command_result.rc == 0 }}"
 
 
 - name: Remove unwanted snaps
@@ -14,7 +15,7 @@
       - thunderbird
       - snap-store
     state: absent
-    when: which_snap_result.rc == 0
+    when: snap_installed
 
 - name: Remove core snap
   community.general.snap:
@@ -23,7 +24,7 @@
       - gnome-42-2204
       - snapd-desktop-integration
     state: absent
-    when: which_snap_result.rc == 0
+    when: snap_installed
 
 - name: Remove core snap 2
   community.general.snap:
@@ -31,17 +32,17 @@
       - core22
       - bare
     state: absent
-    when: which_snap_result.rc == 0
+    when: snap_installed
 
 - name: Remove core snap 3
   community.general.snap:
     name:
       - snapd
     state: absent
-    when: which_snap_result.rc == 0
+    when: snap_installed
 
 - name: Remove unneeded snap
   package:
     state: absent
     name: "snapd"
-    when: which_snap_result.rc == 0
+    when: snap_installed
