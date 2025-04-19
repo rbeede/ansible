@@ -1,87 +1,71 @@
-- name: Install needed ansible dconf dependency
-  package:
-    state: present
-    name: python3-psutil
-
 - name: Terminal font size
-  dconf:
-    key: "/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/font"
-    value: '"Monospace 24"'
+  xfconf:
+    channel: "xfce4-terminal"
+    property: "/font-name"
+    value_type: "string"
+    value: "DejaVu Sans Mono 24"
   become_user: rbeede
 
-- name: Terminal font size use custom
-  dconf:
-    key: "/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/use-system-font"
-    value: "false"
-  become_user: rbeede
-
-- name: Terminal don't use theme colors
-  dconf:
-    key: "/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/use-theme-colors"
+- name: Terminal allow font size to be custom
+  xfconf:
+    channel: "xfce4-terminal"
+    property: "/font-use-system"
+    value_type: "bool"
     value: "false"
   become_user: rbeede
 
 - name: Terminal background-color
-  dconf:
-    key: "/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/background-color"
-    value: '"rgb(0,0,0)"'
+  xfconf:
+    channel: "xfce4-terminal"
+    property: "/color-background"
+    value_type: "string"
+    value: "#000000000000"
   become_user: rbeede
 
 - name: Terminal font color
-  dconf:
-    key: "/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/foreground-color"
-    value: '"rgb(0,255,0)"'
-  become_user: rbeede
-
-- name: Terminal size columns
-  dconf:
-    key: "/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/default-size-columns"
-    value: "70"
-  become_user: rbeede
-- name: Terminal size rows
-  dconf:
-    key: "/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/default-size-rows"
-    value: "50"
-  become_user: rbeede
-
-- name: Desktop background color
-  dconf:
-    key: "/org/gnome/desktop/background/primary-color"
-    value: '"rgb(0,0,0)"'
+  xfconf:
+    channel: "xfce4-terminal"
+    property: "/color-foreground"
+    value_type: "string"
+    value: "#0000ffff0000"
   become_user: rbeede
 
 - name: Remove desktop image
-  dconf:
-    key: "/org/gnome/desktop/background/picture-uri"
-    value: '""'
+  xfconf:
+    channel: "xfce4-desktop"
+    property: "/backdrop/screen0/monitorrdp0/workspace0/image-style"
+    value_type: "int"
+    value: "0"
   become_user: rbeede
 
-- name: Disable screen lock
-  dconf:
-    key: "/org/gnome/desktop/screensaver/lock-enabled"
+- name: Power Manager - Disable screen blank, sleep, switch-off
+  xfconf:
+    channel: "xfce4-power-manager"
+    property: "/xfce4-power-manager/dpms-enabled"
+    value_type: "bool"
     value: "false"
   become_user: rbeede
   
-- name: Disable lock on suspend
-  dconf:
-    key: "/org/gnome/desktop/screensaver/ubuntu-lock-on-suspend"
+- name: Disable screensaver
+  xfconf:
+    channel: "xfce4-screensaver"
+    property: "/saver/enabled"
+    value_type: "bool"
     value: "false"
   become_user: rbeede
 
-- name: Disable screen blanking
-  dconf:
-    key: "/org/gnome/desktop/session/idle-delay"
-    value: "uint32 0"
-  become_user: rbeede
-
-- name: Setup launcher favorites
-  dconf:
-    key: "/org/gnome/shell/favorite-apps"
-    value: "['google-chrome.desktop', 'firefox.desktop', 'org.gnome.Nautilus.desktop', 'org.gnome.Terminal.desktop']"
-  become_user: rbeede
-
-- name: Remove Home icon from desktop
-  dconf:
-    key: "/org/gnome/shell/extensions/ding/show-home"
+- name: Disable Lock Screen
+  xfconf:
+    channel: "xfce4-screensaver"
+    property: "/lock/enabled"
+    value_type: "bool"
     value: "false"
+  become_user: rbeede
+
+- name: Remove all desktop icons
+  xfconf:
+    channel: "xfce4-desktop"
+    property: "/desktop-icons/style"
+    value_type: "int"
+    value: "0"
   become_user: rbeede
