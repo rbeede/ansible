@@ -23,6 +23,11 @@
     group: root
     mode: '0444'
 
+- name: Remove old apt linked to snap view of firefox
+  ansible.builtin.apt:
+    state: absent
+    name: "firefox"
+
 - name: Update apt repo and cache
   ansible.builtin.apt:
     update_cache: yes
