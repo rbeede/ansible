@@ -15,8 +15,22 @@
 - name: Remove unwanted snaps
   community.general.snap:
     name:
-      - chromium
+      - bare
+      - core22
+      - firefox
+      - firmware-updater
+      - gnome-42-2204
+      - gtk-common-themes
+      - snap-store
+      - snapd
+      - snapd-desktop-integration
+      - thunderbird
     state: absent
+
+- name: Remove unneeded snap
+  package:
+    state: absent
+    name: "snapd"
 
 - name: Build list of packages to install
   set_fact:
