@@ -21,6 +21,7 @@ useful_tools_headless:
 
 useful_tools_gui:
   - default-jdk
+  - libnss3-tools
   - simplescreenrecorder
 
 
