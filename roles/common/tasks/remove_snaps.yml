@@ -16,7 +16,7 @@
       - thunderbird
       - snap-store
     state: absent
-    when: snap_installed
+  when: snap_installed
 
 - name: Remove core snap
   community.general.snap:
@@ -33,17 +33,17 @@
       - core22
       - bare
     state: absent
-    when: snap_installed
+  when: snap_installed
 
 - name: Remove core snap 3
   community.general.snap:
     name:
       - snapd
     state: absent
-    when: snap_installed
+  when: snap_installed
 
 - name: Remove unneeded snap
   package:
     state: absent
     name: "snapd"
-    when: snap_installed
+  when: snap_installed
