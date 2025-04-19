@@ -28,11 +28,13 @@
     state: absent
     name: "firefox"
 
-- name: Update apt repo and cache
+- name: Update apt repo and cache forcing apt policy to update for firefox
   ansible.builtin.apt:
+    clean: true
     update_cache: yes
     force_apt_get: yes
-    cache_valid_time: 3600
+    allow_downgrade: yes
+    cache_valid_time: 0
 
 - name: Force apt to install Firefox and not snap
   ansible.builtin.apt:
