@@ -15,13 +15,17 @@
 - name: Remove unwanted snaps
   community.general.snap:
     name:
+      # Order is very important
       - firefox
       - firmware-updater
-      - gnome-42-2204
-      - gtk-common-themes
-      - snap-store
-      - snapd-desktop-integration
       - thunderbird
+      - snap-store
+      - gtk-common-themes
+      - gnome-42-2204
+      - bare
+      - snapd-desktop-integration
+      - core22
+      - snapd
     state: absent
 
 - name: Remove unneeded snap
