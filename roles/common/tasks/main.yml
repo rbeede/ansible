@@ -12,19 +12,34 @@
     state: absent
     name: "{{ packages_to_uninstall }}"
 
+# Order is very important
 - name: Remove unwanted snaps
   community.general.snap:
     name:
-      # Order is very important
       - firefox
       - firmware-updater
       - thunderbird
       - snap-store
+    state: absent
+
+- name: Remove core snap
+  community.general.snap:
+    name:
       - gtk-common-themes
       - gnome-42-2204
-      - bare
       - snapd-desktop-integration
+    state: absent
+
+- name: Remove core snap 2
+  community.general.snap:
+    name:
       - core22
+      - bare
+    state: absent
+
+- name: Remove core snap 3
+  community.general.snap:
+    name:
       - snapd
     state: absent
 
