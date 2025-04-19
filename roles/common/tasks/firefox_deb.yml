@@ -24,12 +24,12 @@
     mode: '0444'
 
 - name: Update apt repo and cache
-  apt:
+  ansible.builtin.apt:
     update_cache: yes
     force_apt_get: yes
     cache_valid_time: 3600
 
-- name: Package manager install Firefox
-  package:
+- name: Force apt to install Firefox and not snap
+  ansible.builtin.apt:
     state: present
     name: "firefox"
