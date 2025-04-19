@@ -25,7 +25,7 @@
       - gnome-42-2204
       - snapd-desktop-integration
     state: absent
-    when: snap_installed
+  when: snap_installed
 
 - name: Remove core snap 2
   community.general.snap:
