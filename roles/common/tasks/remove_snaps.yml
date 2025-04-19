@@ -1,6 +1,7 @@
 - name: Check to see if snapd was already removed
   command: "which snap"
   register: which_snap_command_result
+  failed_when: which_snap_command_result.rc != 0 and which_snap_command_result.rc != 1
 
 - name: Set useful variable
   set_fact:
