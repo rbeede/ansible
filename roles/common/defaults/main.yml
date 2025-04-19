@@ -26,14 +26,24 @@ useful_tools_gui:
 
 
 packages_to_uninstall:
+  - atril
+  - gimp
   - gnome-mines
+  - gnome-sudoku
+  - hexchat
+  - pavucontrol
   - rhythmbox
   - rhythmbox-data
   - rhythmbox-plugin-alternative-toolbar
   - rhythmbox-plugins
-  - gnome-sudoku
+  - sgt-launcher
+  - sgt-puzzles
+  - simple-scan
   - thunderbird
   - thunderbird-locale-en
   - thunderbird-locale-en-us
   - transmission-common
   - transmission-gtk
+  - tumbler
+  - xfburn
+  - xfce4-dict
