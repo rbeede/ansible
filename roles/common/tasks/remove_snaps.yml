@@ -1,0 +1,47 @@
+# Check to see if it was already removed
+- name: Check if command does exist
+  ansible.builtin.raw: which snap
+  check_mode: false
+  changed_when: false
+    register: which_snap_result
+
+
+- name: Remove unwanted snaps
+  community.general.snap:
+    name:
+      - firefox
+      - firmware-updater
+      - thunderbird
+      - snap-store
+    state: absent
+    when: which_snap_result.rc == 0
+
+- name: Remove core snap
+  community.general.snap:
+    name:
+      - gtk-common-themes
+      - gnome-42-2204
+      - snapd-desktop-integration
+    state: absent
+    when: which_snap_result.rc == 0
+
+- name: Remove core snap 2
+  community.general.snap:
+    name:
+      - core22
+      - bare
+    state: absent
+    when: which_snap_result.rc == 0
+
+- name: Remove core snap 3
+  community.general.snap:
+    name:
+      - snapd
+    state: absent
+    when: which_snap_result.rc == 0
+
+- name: Remove unneeded snap
+  package:
+    state: absent
+    name: "snapd"
+    when: which_snap_result.rc == 0
