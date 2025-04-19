@@ -1,9 +1,3 @@
-- name: Remove unwanted snap
-  community.general.snap:
-    name:
-      - firefox
-    state: absent
-
 - name: Mozilla Repo Signing Key
   ansible.builtin.get_url:
     url: https://packages.mozilla.org/apt/repo-signing-key.gpg
