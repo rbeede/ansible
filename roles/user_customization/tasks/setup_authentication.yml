@@ -23,6 +23,14 @@
     mode: '0400'
     content: 'rbeede ALL=(ALL) NOPASSWD:ALL'
 
+- name: policy kit directory
+  file:
+    path: /var/lib/polkit-1/localauthority/50-local.d/
+    owner: root
+    group: root
+    mode: 0700
+    state: directory
+
 - name: GUI polkit permissions for rbeede
   copy:
     dest: /var/lib/polkit-1/localauthority/50-local.d/disable-passwords.pkla
