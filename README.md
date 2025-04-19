@@ -2,7 +2,7 @@
 
 Just a handy ansible setup I use to quickly put together a VM with tools I use.
 
-Clean install of Ubuntu 22.04 64-bit Desktop or server into a VM.
+Clean install of Xubuntu 24.04 64-bit Desktop or Ubuntu server into a VM.
 
 ```
 sudo apt-get update
@@ -18,7 +18,7 @@ sudo ansible-pull --url https://github.com/rbeede/ansible.git --inventory `hostn
 
 `ansible-playbook --connection=local --inventory=localhost, --tags all,gui pentest-machine-playbook.yml`
 
-### Headless instance
+### Headless instance (server)
 ```
 sudo ansible-pull --url https://github.com/rbeede/ansible.git --inventory `hostname`, --tags all pentest-machine-playbook.yml
 ```
