@@ -31,6 +31,7 @@ packages_to_uninstall:
   - gnome-mines
   - gnome-sudoku
   - hexchat
+  - parole
   - pavucontrol
   - rhythmbox
   - rhythmbox-data
@@ -39,11 +40,14 @@ packages_to_uninstall:
   - sgt-launcher
   - sgt-puzzles
   - simple-scan
+  - synaptic 
   - thunderbird
   - thunderbird-locale-en
   - thunderbird-locale-en-us
   - transmission-common
   - transmission-gtk
   - tumbler
+  - update-notifier
   - xfburn
   - xfce4-dict
+  - xterm
