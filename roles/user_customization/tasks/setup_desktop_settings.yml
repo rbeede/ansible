@@ -1,3 +1,7 @@
+# Note that it will take a reboot to get these applied
+# xfconf-query is run as become_user but going from root to become_user will not update the currently GUI session
+# only the underlying xml in become_user's home directory - .config/xfce4/xfconf/xfce-perchannel-xml/
+
 - name: Terminal font size
   xfconf:
     channel: "xfce4-terminal"
