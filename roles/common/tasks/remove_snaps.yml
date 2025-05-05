@@ -1,0 +1,49 @@
+- name: Check to see if snapd was already removed
+  command: "which snap"
+  register: which_snap_command_result
+  failed_when: which_snap_command_result.rc != 0 and which_snap_command_result.rc != 1
+
+- name: Set useful variable
+  set_fact:
+    snap_installed: "{{ which_snap_command_result.rc == 0 }}"
+
+
+- name: Remove unwanted snaps
+  community.general.snap:
+    name:
+      - firefox
+      - firmware-updater
+      - thunderbird
+    state: absent
+  when: snap_installed
+
+- name: Remove core snap
+  community.general.snap:
+    name:
+      - snap-store
+      - gtk-common-themes
+      - gnome-42-2204
+      - snapd-desktop-integration
+    state: absent
+  when: snap_installed
+
+- name: Remove core snap 2
+  community.general.snap:
+    name:
+      - core22
+      - bare
+    state: absent
+  when: snap_installed
+
+- name: Remove core snap 3
+  community.general.snap:
+    name:
+      - snapd
+    state: absent
+  when: snap_installed
+
+- name: Remove unneeded snap
+  package:
+    state: absent
+    name: "snapd"
+  when: snap_installed

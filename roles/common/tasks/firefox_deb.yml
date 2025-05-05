@@ -1,9 +1,3 @@
-- name: Remove unwanted snap
-  community.general.snap:
-    name:
-      - firefox
-    state: absent
-
 - name: Mozilla Repo Signing Key
   ansible.builtin.get_url:
     url: https://packages.mozilla.org/apt/repo-signing-key.gpg
@@ -29,13 +23,20 @@
     group: root
     mode: '0444'
 
-- name: Update apt repo and cache
-  apt:
+- name: Remove old apt linked to snap view of firefox
+  ansible.builtin.apt:
+    state: absent
+    name: "firefox"
+
+- name: Update apt repo and cache forcing apt policy to update for firefox
+  ansible.builtin.apt:
+    clean: true
     update_cache: yes
     force_apt_get: yes
-    cache_valid_time: 3600
+    allow_downgrade: yes
+    cache_valid_time: 0
 
-- name: Package manager install Firefox
-  package:
+- name: Force apt to install Firefox and not snap
+  ansible.builtin.apt:
     state: present
     name: "firefox"

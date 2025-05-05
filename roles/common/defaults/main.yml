@@ -10,9 +10,6 @@ useful_tools_headless:
   - nmap
   - p7zip-full
   - parallel
-  - python3-boto3
-  - python3-pip
-  - python3-virtualenv
   - resolvconf
   - ripgrep
   - slowhttptest
@@ -29,24 +26,28 @@ useful_tools_gui:
 
 
 packages_to_uninstall:
-  - chromium-browser
-  - evolution
-  - slack
-  - slack-desktop
-  - aisleriot
-  - gnome-mahjongg
+  - atril
+  - gimp
   - gnome-mines
-  - pidgin pidgin-data
+  - gnome-sudoku
+  - hexchat
+  - parole
+  - pavucontrol
   - rhythmbox
   - rhythmbox-data
   - rhythmbox-plugin-alternative-toolbar
   - rhythmbox-plugins
-  - gnome-sudoku
+  - sgt-launcher
+  - sgt-puzzles
+  - simple-scan
+  - synaptic 
   - thunderbird
-  - thunderbird-gnome-support
   - thunderbird-locale-en
   - thunderbird-locale-en-us
-  - gnome-todo
-  - gnome-todo-common
   - transmission-common
   - transmission-gtk
+  - tumbler
+  - update-notifier
+  - xfburn
+  - xfce4-dict
+  - xterm
