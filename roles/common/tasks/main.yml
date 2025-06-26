@@ -13,10 +13,7 @@
     name: "{{ packages_to_uninstall }}"
 
 - name: Remove unwanted snaps
-  community.general.snap:
-    name:
-      - chromium
-    state: absent
+  import_tasks: remove_snaps.yml
 
 - name: Build list of packages to install
   set_fact:
