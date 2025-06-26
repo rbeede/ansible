@@ -19,7 +19,7 @@ sudo ansible-pull --url https://github.com/rbeede/ansible.git --inventory `hostn
 
 `ansible-playbook --connection=local --inventory=localhost, --tags all,gui pentest-machine-playbook.yml`
 
-### Headless instance (server)
+### Headless instance (ubuntu-server)
 ```
 sudo ansible-pull --url https://github.com/rbeede/ansible.git --inventory `hostname`, --tags all pentest-machine-playbook.yml
 ```
