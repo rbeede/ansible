@@ -12,6 +12,7 @@ useful_tools_headless:
   - parallel
   - resolvconf
   - ripgrep
+  - screen
   - slowhttptest
   - sysstat
   - vim
@@ -51,3 +52,4 @@ packages_to_uninstall:
   - xfburn
   - xfce4-dict
   - xterm
+
