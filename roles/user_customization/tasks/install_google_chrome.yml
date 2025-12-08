@@ -6,9 +6,11 @@
     update_cache: true
 
 - name: Add Apt signing key
-  ansible.builtin.apt_key:
+  ansible.builtin.get_url:
     url: "https://dl.google.com/linux/linux_signing_key.pub"
-    state: present
+    dest: /etc/apt/trusted.gpg.d/google-chrome.asc
+    mode: '0644'
+    force: true
 
 - name: Add repository into sources list
   ansible.builtin.apt_repository:
