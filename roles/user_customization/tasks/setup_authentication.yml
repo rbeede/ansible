@@ -21,7 +21,7 @@
     owner: root
     group: root
     mode: '0400'
-    content: 'rbeede ALL=(ALL) NOPASSWD:ALL'
+    content: 'rbeede ALL=(ALL) NOPASSWD:ALL\n'
 
 - name: policy kit directory
   file:
@@ -43,3 +43,4 @@
       Action=*
       ResultActive=yes
   tags: [ never, gui ]
+
