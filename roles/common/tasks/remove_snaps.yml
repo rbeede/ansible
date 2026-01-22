@@ -1,3 +1,7 @@
+# As of Ubuntu 25.10 we cannot remove snapd and every snap because headless VMs like AWS Ubuntu server use snap for amazon-ssm-agent and that breaks too much
+# Remove the most annoying ones anyway though
+
+
 - name: Check to see if snapd was already removed
   command: "which snap"
   register: which_snap_command_result
@@ -25,25 +29,4 @@
       - gnome-42-2204
       - snapd-desktop-integration
     state: absent
-  when: snap_installed
-
-- name: Remove core snap 2
-  community.general.snap:
-    name:
-      - core22
-      - bare
-    state: absent
-  when: snap_installed
-
-- name: Remove core snap 3
-  community.general.snap:
-    name:
-      - snapd
-    state: absent
-  when: snap_installed
-
-- name: Remove unneeded snap
-  package:
-    state: absent
-    name: "snapd"
   when: snap_installed
