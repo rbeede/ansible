@@ -6,6 +6,7 @@ useful_tools_headless:
   - default-jdk-headless
   - htop
   - jq
+  - masscan
   - nload
   - nmap
   - p7zip-full
@@ -52,4 +53,5 @@ packages_to_uninstall:
   - xfburn
   - xfce4-dict
   - xterm
+
 
