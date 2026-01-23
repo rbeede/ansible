@@ -4,6 +4,7 @@ useful_tools_headless:
   - binwalk
   - curl
   - default-jdk-headless
+  - dos2unix
   - htop
   - jq
   - masscan
@@ -53,5 +54,6 @@ packages_to_uninstall:
   - xfburn
   - xfce4-dict
   - xterm
+
 
 
