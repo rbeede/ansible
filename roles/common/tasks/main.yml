@@ -32,8 +32,8 @@
 - name: Software tools directory
   file:
     path: /Software
-    owner: rbeede
-    group: rbeede
+    owner: "{{ username }}"
+    group: "{{ username }}"
     mode: 0700
     state: directory
   
@@ -41,8 +41,8 @@
   copy:
     src: Software/  # from role's files/ directory
     dest: /Software/
-    owner: rbeede
-    group: rbeede
+    owner: "{{ username }}"
+    group: "{{ username }}"
     mode: 0500
 
 - name: Deb Firefox not snap
@@ -52,3 +52,4 @@
 - name: Firefox settings
   import_tasks: firefox_user_prefs.yml
   tags: [ never, gui ]
+
