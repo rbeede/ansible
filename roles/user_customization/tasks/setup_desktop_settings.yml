@@ -8,7 +8,7 @@
     property: "/font-name"
     value_type: "string"
     value: "DejaVu Sans Mono 24"
-  become_user: rbeede
+  become_user: "{{ username }}"
 
 - name: Terminal allow font size to be custom
   xfconf:
@@ -16,7 +16,7 @@
     property: "/font-use-system"
     value_type: "bool"
     value: "false"
-  become_user: rbeede
+  become_user: "{{ username }}"
 
 - name: Terminal background-color
   xfconf:
@@ -24,7 +24,7 @@
     property: "/color-background"
     value_type: "string"
     value: "#000000000000"
-  become_user: rbeede
+  become_user: "{{ username }}"
 
 - name: Terminal font color
   xfconf:
@@ -32,7 +32,7 @@
     property: "/color-foreground"
     value_type: "string"
     value: "#0000ffff0000"
-  become_user: rbeede
+  become_user: "{{ username }}"
 
 - name: Remove desktop image
   xfconf:
@@ -40,7 +40,7 @@
     property: "/backdrop/screen0/monitorrdp0/workspace0/image-style"
     value_type: "int"
     value: "0"
-  become_user: rbeede
+  become_user: "{{ username }}"
 
 - name: Power Manager - Disable screen blank, sleep, switch-off
   xfconf:
@@ -48,7 +48,7 @@
     property: "/xfce4-power-manager/dpms-enabled"
     value_type: "bool"
     value: "false"
-  become_user: rbeede
+  become_user: "{{ username }}"
   
 - name: Disable screensaver
   xfconf:
@@ -56,7 +56,7 @@
     property: "/saver/enabled"
     value_type: "bool"
     value: "false"
-  become_user: rbeede
+  become_user: "{{ username }}"
 
 - name: Disable Lock Screen
   xfconf:
@@ -64,7 +64,7 @@
     property: "/lock/enabled"
     value_type: "bool"
     value: "false"
-  become_user: rbeede
+  become_user: "{{ username }}"
 
 - name: Remove all desktop icons
   xfconf:
@@ -72,4 +72,5 @@
     property: "/desktop-icons/style"
     value_type: "int"
     value: "0"
-  become_user: rbeede
+  become_user: "{{ username }}"
+
