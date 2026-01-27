@@ -6,23 +6,23 @@
       - git
 
 - user:
-    name: rbeede
+    name: "{{ username }}"
     password: ""
     shell: "/bin/bash"
 
 - authorized_key:
-    user: rbeede
+    user: "{{ username }}"
     state: present
-    key: https://github.com/rbeede.keys
+    key: "https://github.com/{{ username }}.keys"
 
-- name: sudoers for rbeede
+- name: "sudoers for {{ username }}"
   copy:
-    dest: /etc/sudoers.d/rbeede
+    dest: "/etc/sudoers.d/{{ username }}"
     owner: root
     group: root
     mode: '0400'
     content: |
-      rbeede ALL=(ALL) NOPASSWD:ALL
+      {{ username }} ALL=(ALL) NOPASSWD:ALL
 
 - name: policy kit directory
   file:
@@ -32,7 +32,7 @@
     mode: 0700
     state: directory
 
-- name: GUI polkit permissions for rbeede
+- name: "GUI polkit permissions for {{ username }}"
   copy:
     dest: /var/lib/polkit-1/localauthority/50-local.d/disable-passwords.pkla
     owner: root
@@ -40,9 +40,10 @@
     mode: '0400'
     content: |
       [Do anything you want]
-      Identity=unix-user:rbeede
+      Identity=unix-user:{{ username }}
       Action=*
       ResultActive=yes
   tags: [ never, gui ]
+
 
 
