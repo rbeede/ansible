@@ -1,7 +1,8 @@
 - name: Copy any useful files to home directory
   copy:
     src: homedir/  # from role's files/ directory
-    dest: /home/rbeede/
-    owner: rbeede
-    group: rbeede
+    dest: "/home/{{ username }}/"
+    owner: "{{ username }}"
+    group: "{{ username }}"
     mode: 0400
+
