@@ -2,7 +2,7 @@
 
 Just a handy ansible setup I use to quickly put together a VM with tools I use.
 
-Clean install of Xubuntu 24.04 64-bit Desktop or Ubuntu server into a VM.
+Clean install of Xubuntu 25.10 64-bit Desktop or Ubuntu server into a VM.
 
 The community.general gets installed with ansible, not ansible-core.
 ```
