@@ -17,6 +17,18 @@
     manager: auto
 
 
+- name: Get network manager profile name
+  ansible.builtin.shell: "nmcli --get-values NAME connection | grep netplan"
+  register: nmcli_command_result
+  changed_when: false  # Prevents task from reporting a change
+
+- ansible.builtin.set_fact:
+    network_connection_profile: "{{ nmcli_command_result.stdout_lines[0] | default('', true) }}"
+
+- ansible.builtin.debug:
+    var: network_connection_profile
+
+
 # Only changes DNS for GUI OS installs that have network-manager
 #
 # Tried using Ansible's  nmcli  module but as of 2020-08-14 it still has
@@ -39,3 +51,4 @@
 
 - name: Show current DNS
   command: resolvectl status
+
