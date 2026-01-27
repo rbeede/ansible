@@ -18,7 +18,7 @@
 
 
 - name: Get network manager profile name
-  ansible.builtin.command: nmcli con show | grep netplan
+  ansible.builtin.shell: "nmcli con show | grep netplan"
   register: nmcli_command_result
   changed_when: false  # Prevents task from reporting a change
 
@@ -51,4 +51,3 @@
 
 - name: Show current DNS
   command: resolvectl status
-
