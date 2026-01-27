@@ -1,7 +1,11 @@
+# November 2025 - Default directory for profiles and cache changed to XDG standard as per https://bugzilla.mozilla.org/show_bug.cgi?id=259356#c223
+# was ~/.mozilla but now under .config
+
+
 - name: Ensure Firefox default profile folder exists
   ansible.builtin.command:
     cmd: firefox --headless --marionette
-    creates: "/home/rbeede/.mozilla/firefox/*.default-release"
+    creates: "/home/{{ username }}/.config/mozilla/firefox/*.default-release"
   async: 20
   poll: 0
   become_user: rbeede
@@ -9,11 +13,11 @@
 - name: Close Firefox Marionette
   ansible.builtin.command:
     cmd: bash -c echo '37:[0, 1234, "WebDriver:NewSession", {}]32:[0, 1235, "Marionette:Quit", {}]' | nc localhost 2828
-    creates: "/home/rbeede/.mozilla/firefox/*.default-release"
+    creates: "/home/{{ username }}/.config/mozilla/firefox/*.default-release"
 
 - name: Grab Firefox config folder
   ansible.builtin.find:
-    paths: "/home/rbeede/.mozilla/firefox"
+    paths: "/home/rbeede/.config/mozilla/firefox"
     patterns: '.*\.default-release'
     use_regex: true
     file_type: directory
