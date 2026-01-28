@@ -33,10 +33,9 @@
 
 - name: Update apt repo and cache forcing apt policy to update for firefox
   ansible.builtin.apt:
-    clean: true
     update_cache: yes
+    update_cache_retries: 1
     force_apt_get: yes
-    allow_downgrade: yes
     cache_valid_time: 0
 
 - name: Force apt to install Firefox and not snap
