@@ -17,9 +17,12 @@
     dest: /etc/apt/preferences.d/mozilla
     content: |
       Package: *
-      Pin: origin packages.mozilla.org
-      Pin-Priority: 1000
-    owner: root
+      Pin: release o=LP-PPA-mozillateam
+      Pin-Priority: 1001
+      
+      Package: firefox
+      Pin: version 1:1snap*
+      Pin-Priority: -1    owner: root
     group: root
     mode: '0444'
 
