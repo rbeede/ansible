@@ -10,10 +10,13 @@
   poll: 0
   become_user: "{{ username }}"
 
-- name: Use stat module to check if the profile exists
-  ansible.builtin.stat:
-    path: "/home/{{ username }}/.config/mozilla/firefox/*.default-release"
-  register: profile_exists_check_result
+- name: See if Firefox config folder non-snap version already exists
+  ansible.builtin.find:
+    paths: "/home/{{ username }}/.config/mozilla/firefox"
+    patterns: '.*\.default-release'
+    use_regex: true
+    file_type: directory
+  register: firefox_config_folder_list
 
 - name: Wait for application to start listening on port
   ansible.builtin.wait_for:
@@ -22,7 +25,7 @@
     state: started
     delay: 2
     timeout: 10
-  when: not profile_exists_check_result.stat.exists
+  when: not firefox_config_folder_list.matched
 
 - name: Close Firefox Marionette
   ansible.builtin.command:
