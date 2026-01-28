@@ -10,6 +10,14 @@
   poll: 0
   become_user: rbeede
 
+- name: Wait for application to start listening on port
+  ansible.builtin.wait_for:
+    port: 2828
+    host: 127.0.0.1
+    state: started
+    delay: 2
+    timeout: 10
+
 - name: Close Firefox Marionette
   ansible.builtin.command:
     cmd: bash -c echo '37:[0, 1234, "WebDriver:NewSession", {}]32:[0, 1235, "Marionette:Quit", {}]' | nc localhost 2828
