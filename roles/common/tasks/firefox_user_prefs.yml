@@ -8,7 +8,7 @@
     creates: "/home/{{ username }}/.config/mozilla/firefox/*.default-release"
   async: 20
   poll: 0
-  become_user: rbeede
+  become_user: "{{ username }}"
 
 - name: Wait for application to start listening on port
   ansible.builtin.wait_for:
