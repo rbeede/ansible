@@ -24,7 +24,15 @@
     packages_to_install: "{{ packages_to_install + useful_tools_gui }}"
   tags: [ never, gui ]
 
-- name: Useful tools and packages
+- name: Deb Firefox not snap, otherwise unwanted firefox snap reinstalls from apt
+  import_tasks: firefox_deb.yml
+  tags: [ never, gui ]
+
+- name: Firefox settings
+  import_tasks: firefox_user_prefs.yml
+  tags: [ never, gui ]
+
+- name: INSTALL Useful tools and packages
   package:
     state: present
     name: "{{ packages_to_install }}"
@@ -45,11 +53,5 @@
     group: "{{ username }}"
     mode: 0500
 
-- name: Deb Firefox not snap
-  import_tasks: firefox_deb.yml
-  tags: [ never, gui ]
 
-- name: Firefox settings
-  import_tasks: firefox_user_prefs.yml
-  tags: [ never, gui ]
 
