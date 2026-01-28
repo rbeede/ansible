@@ -25,7 +25,7 @@
 
 - name: Grab Firefox config folder
   ansible.builtin.find:
-    paths: "/home/rbeede/.config/mozilla/firefox"
+    paths: "/home/{{ username }}/.config/mozilla/firefox"
     patterns: '.*\.default-release'
     use_regex: true
     file_type: directory
