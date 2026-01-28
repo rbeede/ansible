@@ -17,8 +17,8 @@
     dest: /etc/apt/preferences.d/mozilla
     content: |
       Package: *
-      Pin: release o=LP-PPA-mozillateam
-      Pin-Priority: 1001
+      Pin: origin packages.mozilla.org
+      Pin-Priority: 1000
       
       Package: firefox
       Pin: version 1:1snap*
