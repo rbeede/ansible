@@ -10,7 +10,9 @@
 - name: Set useful variable
   set_fact:
     snap_installed: "{{ which_snap_command_result.rc == 0 }}"
-
+- name: Print the value of the 'snap_installed' variable
+  ansible.builtin.debug:
+    var: snap_installed
 
 - name: Remove unwanted snaps
   community.general.snap:
