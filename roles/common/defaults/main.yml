@@ -12,6 +12,7 @@ useful_tools_headless:
   - nmap
   - p7zip-full
   - parallel
+  - python3-venv
   - resolvconf
   - ripgrep
   - screen
@@ -54,6 +55,7 @@ packages_to_uninstall:
   - xfburn
   - xfce4-dict
   - xterm
+
 
 
 
