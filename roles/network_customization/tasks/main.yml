@@ -11,6 +11,11 @@
     - libnss-mdns
     - libavahi-core7
 
+# Update list of packages
+- name: Gather package facts
+  ansible.builtin.package_facts:
+    manager: auto
+
 
 #########################################################################
 # Only changes DNS for GUI OS installs that have network-manager
@@ -49,5 +54,6 @@
 
 - name: Show current DNS
   command: resolvectl status
+
 
 
