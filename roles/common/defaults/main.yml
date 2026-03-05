@@ -1,6 +1,7 @@
 ---
 useful_tools_headless:
   - aria2
+  - bind9-dnsutils  # WSL2 Ubuntu misses by default
   - binwalk
   - curl
   - default-jdk-headless
@@ -55,6 +56,7 @@ packages_to_uninstall:
   - xfburn
   - xfce4-dict
   - xterm
+
 
 
 
