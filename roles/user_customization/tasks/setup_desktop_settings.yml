@@ -34,7 +34,15 @@
     value: "#0000ffff0000"
   become_user: "{{ username }}"
 
-- name: Remove desktop image
+- name: Remove desktop image in Hyper-V
+  xfconf:
+    channel: "xfce4-desktop"
+    property: "/backdrop/screen0/monitorVirtual-1/workspace0/image-style"
+    value_type: "int"
+    value: "0"
+  become_user: "{{ username }}"
+
+- name: Remove desktop image in VMWare
   xfconf:
     channel: "xfce4-desktop"
     property: "/backdrop/screen0/monitorrdp0/workspace0/image-style"
