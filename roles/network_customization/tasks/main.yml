@@ -37,8 +37,13 @@
 - ansible.builtin.debug:
     var: network_connection_profile
 
-- name: Ignore DHCP issued DNS
+- name: Ignore DHCP issued DNS IPv4
   command: nmcli connection modify "{{ network_connection_profile }}"  ipv4.ignore-auto-dns true
+  when: "'network-manager' in ansible_facts.packages"
+  tags: [ never, gui ]
+
+- name: Ignore DHCP issued DNS IPv6
+  command: nmcli connection modify "{{ network_connection_profile }}"  ipv6.ignore-auto-dns true
   when: "'network-manager' in ansible_facts.packages"
   tags: [ never, gui ]
 
@@ -52,7 +57,7 @@
   when: "'network-manager' in ansible_facts.packages"
   tags: [ never, gui ]
 
-- name: Show current DNS
+- name: Show current DNS when ansible run with verbose
   command: resolvectl status
 
 
