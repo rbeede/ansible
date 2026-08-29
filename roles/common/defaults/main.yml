@@ -8,6 +8,7 @@ useful_tools_headless:
   - dos2unix
   - htop
   - jq
+  - libxml2-utils
   - masscan
   - nload
   - nmap
