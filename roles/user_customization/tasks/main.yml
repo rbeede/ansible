@@ -8,4 +8,4 @@
 - import_tasks: setup_desktop_settings.yml
   tags: [ never, gui ]
 
--import_tasks: disable_keyring.yml
+- import_tasks: disable_keyring.yml
