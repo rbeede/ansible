@@ -1,0 +1,20 @@
+- name: Remove GNOME Keyring components
+  become: yes
+  apt:
+    name:
+      - gnome-keyring
+      - gnome-keyring-pkcs11
+      - libpam-gnome-keyring
+    state: absent
+    purge: yes
+
+- name: Remove GNOME Keyring autostart files if they remain
+  become: yes
+  file:
+    path: "/etc/xdg/autostart/{{ item }}"
+    state: absent
+  loop:
+    - gnome-keyring-pkcs11.desktop
+    - gnome-keyring-secrets.desktop
+    - gnome-keyring-ssh.desktop
+    - gnome-keyring-daemon.desktop
