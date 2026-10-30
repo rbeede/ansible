@@ -53,5 +53,5 @@
     group: "{{ username }}"
     mode: 0500
 
-
-
+- name: /tmp on disk, not tmpfs
+  import_tasks: tmp_on_disk.yml
