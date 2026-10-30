@@ -1,0 +1,13 @@
+# Avoid unwanted terminal crashes because /tmp (default a tmpfs on Xubuntu/Ubuntu) runs out of space (memory)
+# So it is moved to be on-disk
+
+- name: Keep /tmp on disk instead of tmpfs (mask tmp.mount)
+  systemd:
+    name: tmp.mount
+    masked: yes
+  register: tmp_mount_masked
+
+- name: Reboot needed for /tmp change
+  debug:
+    msg: "tmp.mount masked; /tmp moves to disk after the next reboot"
+  when: tmp_mount_masked.changed
